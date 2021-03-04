@@ -105,6 +105,7 @@
                     </li>
                   </ul>
                 </li>
+
                 <li>
                   <a href="jobs.html" title="">
                     <span><img src="images/icon5.png" alt="" /></span>
@@ -172,83 +173,25 @@
                   </div>
                 </li>
                 <li>
-                  <a href="#" title="" class="not-box-open">
-                    <span><img src="images/icon7.png" alt="" /></span>
-                    Notification
-                  </a>
-                  <div class="notification-box noti" id="notification">
-                    <div class="nt-title">
-                      <h4>Setting</h4>
-                      <a href="#" title="">Clear all</a>
-                    </div>
-                    <div class="nott-list">
-                      <div class="notfication-details">
-                        <div class="noty-user-img">
-                          <img src="images/resources/ny-img1.png" alt="" />
+                    {% if app.user %}
+                        <a class="btn btn-outline-info" href="{{ path('membre') }}">Page membre</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="btn btn-outline-warning" href="{{ path('admin') }}">Page admin</a>
+                        {% endif %}
+                        <div>
+                            Bonjour {{ app.user.username }} <a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
                         </div>
-                        <div class="notification-info">
-                          <h3>
-                            <a href="#" title="">Jassica William</a> Comment on
-                            your project.
-                          </h3>
-                          <span>2 min ago</span>
+                    {% else %}
+                        <div>
+                            <a class="btn btn-sm btn-primary" href="{{ path('utilisateur_new') }}">S'inscrire</a>
+                            <a class="btn btn-sm btn-success" href="{{ path('app_login') }}">Se connecter</a>
                         </div>
-                      </div>
-                      <div class="notfication-details">
-                        <div class="noty-user-img">
-                          <img src="images/resources/ny-img2.png" alt="" />
-                        </div>
-                        <div class="notification-info">
-                          <h3>
-                            <a href="#" title="">Jassica William</a> Comment on
-                            your project.
-                          </h3>
-                          <span>2 min ago</span>
-                        </div>
-                      </div>
-                      <div class="notfication-details">
-                        <div class="noty-user-img">
-                          <img src="images/resources/ny-img3.png" alt="" />
-                        </div>
-                        <div class="notification-info">
-                          <h3>
-                            <a href="#" title="">Jassica William</a> Comment on
-                            your project.
-                          </h3>
-                          <span>2 min ago</span>
-                        </div>
-                      </div>
-                      <div class="notfication-details">
-                        <div class="noty-user-img">
-                          <img src="images/resources/ny-img2.png" alt="" />
-                        </div>
-                        <div class="notification-info">
-                          <h3>
-                            <a href="#" title="">Jassica William</a> Comment on
-                            your project.
-                          </h3>
-                          <span>2 min ago</span>
-                        </div>
-                      </div>
-                      <div class="view-all-nots">
-                        <a href="#" title="">View All Notification</a>
-                      </div>
-                    </div>
-                  </div>
+                    {% endif %}
                 </li>
-<li>
-                {% if app.user %}
 
-                    <li>Bonjour {{ app.user.username }} </li>
-                    <li><a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">Déconnexion</a></li>
 
-                {% else %}
 
-                    <li><a class="btn btn-sm btn-primary" href="{{ path('utilisateur_new') }}">S'inscrire</a></li>
-                    <li><a class="btn btn-sm btn-success" href="{{ path('app_login') }}">Se connecter</a></li>
 
-                {% endif %}
-                </li>
               </ul>
 
             </nav>

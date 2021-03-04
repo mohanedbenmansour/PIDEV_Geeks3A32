@@ -6,13 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class SecurityController extends AbstractController
 {
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, Session $session): Response
     {
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
@@ -23,7 +24,16 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('log_in/index.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        $return = ['last_username' => $lastUsername, 'error' => $error];
+
+        if($session->has('message'))
+        {
+            $message = $session->get('message');
+            $session->remove('message'); //on vide la variable message dans la session
+            $return['message'] = $message; //on ajoute à l'array de paramètres notre message
+        }
+
+        return $this->render('security/login.html.twig', $return);
     }
 
     /**
