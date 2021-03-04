@@ -252,15 +252,6 @@
               </ul>
 
             </nav>
-            <div class="container">
-              {% if message is defined %}
-                <div class="alert alert-danger">
-                  {{ message }}
-                </div>
-              {% endif %}
-              {% block body %}
-              {% endblock %}
-            </div>
             <div class="menu-btn">
               <a href="#" title=""><i class="fa fa-bars"></i></a>
           </div>
@@ -269,7 +260,7 @@
       </header>
 {% endblock %}
 
-
+        {% block body %}{% endblock %}
 
 
         {% block footer %} 
