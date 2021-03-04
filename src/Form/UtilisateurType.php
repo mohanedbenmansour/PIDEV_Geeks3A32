@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 //ajout du use pour utiliser le type input password de Symfony
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class UtilisateurType extends AbstractType
 {
@@ -15,6 +16,8 @@ class UtilisateurType extends AbstractType
     {
         $builder
             ->add('username')
+            ->add('email',EmailType::class)
+            ->add('phoneNumber')
             // suppression du role qui sera défini par défaut
             ->add('password', PasswordType::class
             )
