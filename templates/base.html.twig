@@ -99,9 +99,12 @@
                       <a href="" title="">User Profile</a>
                     </li>
                     <li>
-                      <a href="my-profile-feed.html" title=""
-                        >my-profile-feed</a
-                      >
+                        {% if app.user %}
+                        <a href="{{ path('membre') }}">Page membre</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('admin') }}">Page admin</a>
+                        {% endif %}
+                        {% endif %}
                     </li>
                   </ul>
                 </li>
@@ -174,10 +177,7 @@
                 </li>
                 <li>
                     {% if app.user %}
-                        <a class="btn btn-outline-info" href="{{ path('membre') }}">Page membre</a>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <a class="btn btn-outline-warning" href="{{ path('admin') }}">Page admin</a>
-                        {% endif %}
+
                         <div>
                             Bonjour {{ app.user.username }} <a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
                         </div>
