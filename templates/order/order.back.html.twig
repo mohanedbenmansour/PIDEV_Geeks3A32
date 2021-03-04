@@ -1,0 +1,44 @@
+{% extends 'base.back.html.twig' %}
+
+
+{% block main %}
+    <div class="container text-center">
+        <h1>orders</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>UserId</th>
+                <th>OrderDetail</th>
+                <th>UserAdress</th>
+                <th>CheckoutDate</th>
+                <th>UserPhone</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.userId }}</td>
+                    <td>{{ order.orderDetail }}</td>
+                    <td>{{ order.userAdress }}</td>
+                    <td>{{ order.checkoutDate }}</td>
+                    <td>{{ order.userPhone }}</td>
+                    <td>
+
+                        <a class="btn btn-danger" href="{{ path("order_delete",{"id":order.id}) }}">delete</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.back.html.twig' %}
+
+{% block title %}New Product{% endblock %}
+
+{% block main %}
+<style>
+    li{
+        color: red;
+        font-size: 15px;
+        width: 10%;
+
+    }
+</style>
+<div class="container text-center">
+<h1>gestion produit</h1>
+    <a class="btn btn-success" style="width: 90%" href="{{ path('product_index') }}">show products</a>
+
+    {{ include('product/_form.html.twig') }}
+
+
+<div>
+
+{% endblock %}
