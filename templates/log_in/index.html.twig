@@ -68,47 +68,46 @@
                     </li>
                     <li data-tab="tab-2"><a href="#" title="">Sign up</a></li>
                   </ul>
+                  {% block body %}
                   <div class="sign_in_sec current" id="tab-1">
                     <h3>Sign in</h3>
-                    <form>
-                      <div class="row">
-                        <div class="col-lg-12 no-pdd">
-                          <div class="sn-field">
-                            <input
-                              type="text"
-                              name="username"
-                              placeholder="Username"
-                            />
-                            <i class="la la-user"></i>
-                          </div>
+                    <form method="post">
+                      {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                      {% endif %}
+
+                      {% if app.user %}
+                        <div class="mb-3">
+                          You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
                         </div>
-                        <div class="col-lg-12 no-pdd">
-                          <div class="sn-field">
-                            <input
-                              type="password"
-                              name="password"
-                              placeholder="Password"
-                            />
-                            <i class="la la-lock"></i>
-                          </div>
-                        </div>
-                        <div class="col-lg-12 no-pdd">
-                          <div class="checky-sec">
-                            <div class="fgt-sec">
-                              <input type="checkbox" name="cc" id="c1" />
-                              <label for="c1">
-                                <span></span>
-                              </label>
-                              <small>Remember me</small>
-                            </div>
-                            <a href="#" title="">Forgot Password?</a>
-                          </div>
-                        </div>
-                        <div class="col-lg-12 no-pdd">
-                          <button type="submit" value="submit">Sign in</button>
-                        </div>
+                      {% endif %}
+
+                      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                      <label for="inputUsername">Username</label>
+                      <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
+                      <label for="inputPassword">Password</label>
+                      <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+                      <input type="hidden" name="_csrf_token"
+                             value="{{ csrf_token('authenticate') }}"
+                      >
+
+                      {#
+                      Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                      See https://symfony.com/doc/current/security/remember_me.html
+
+                      <div class="checkbox mb-3">
+                          <label>
+                              <input type="checkbox" name="_remember_me"> Remember me
+                          </label>
                       </div>
+                      #}
+
+                      <button class="btn btn-lg btn-primary" type="submit">
+                        Sign in
+                      </button>
                     </form>
+                    {% endblock %}
                     <div class="login-resources">
                       <h4>Login Via Social Account</h4>
                       <ul>
@@ -136,14 +135,7 @@
                           >[email&#160;protected]</a
                         >
                       </h2>
-                      <ul>
-                        <li data-tab="tab-3" class="current">
-                          <a href="#" title="">User</a>
-                        </li>
-                        <li data-tab="tab-4">
-                          <a href="#" title="">Company</a>
-                        </li>
-                      </ul>
+
                     </div>
                     <div class="dff-tab current" id="tab-3">
                       <form>
@@ -223,71 +215,7 @@
                         </div>
                       </form>
                     </div>
-                    <div class="dff-tab" id="tab-4">
-                      <form>
-                        <div class="row">
-                          <div class="col-lg-12 no-pdd">
-                            <div class="sn-field">
-                              <input
-                                type="text"
-                                name="company-name"
-                                placeholder="Company Name"
-                              />
-                              <i class="la la-building"></i>
-                            </div>
-                          </div>
-                          <div class="col-lg-12 no-pdd">
-                            <div class="sn-field">
-                              <input
-                                type="text"
-                                name="country"
-                                placeholder="Country"
-                              />
-                              <i class="la la-globe"></i>
-                            </div>
-                          </div>
-                          <div class="col-lg-12 no-pdd">
-                            <div class="sn-field">
-                              <input
-                                type="password"
-                                name="password"
-                                placeholder="Password"
-                              />
-                              <i class="la la-lock"></i>
-                            </div>
-                          </div>
-                          <div class="col-lg-12 no-pdd">
-                            <div class="sn-field">
-                              <input
-                                type="password"
-                                name="repeat-password"
-                                placeholder="Repeat Password"
-                              />
-                              <i class="la la-lock"></i>
-                            </div>
-                          </div>
-                          <div class="col-lg-12 no-pdd">
-                            <div class="checky-sec st2">
-                              <div class="fgt-sec">
-                                <input type="checkbox" name="cc" id="c3" />
-                                <label for="c3">
-                                  <span></span>
-                                </label>
-                                <small
-                                  >Yes, I understand and agree to the workwise
-                                  Terms & Conditions.</small
-                                >
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-lg-12 no-pdd">
-                            <button type="submit" value="submit">
-                              Get Started
-                            </button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
+
                   </div>
                 </div>
               </div>
