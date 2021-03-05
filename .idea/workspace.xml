@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0887bbdf-2826-436f-a961-76713b31479b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PubliciteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PubliciteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PublicityType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PublicityType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/publicite/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/publicite/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,6 +145,7 @@
       <updated>1614857034079</updated>
       <workItem from="1614857051954" duration="7937000" />
       <workItem from="1614883988087" duration="2249000" />
+      <workItem from="1614935229509" duration="3991000" />
     </task>
     <servers />
   </component>

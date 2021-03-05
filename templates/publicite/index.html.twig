@@ -24,8 +24,8 @@
                 <td>{{ publicite.content }}</td>
                 <td>{{ publicite.dateDebut ? publicite.dateDebut|date('Y-m-d') : '' }}</td>
                 <td>{{ publicite.dateFin }}</td>
-                <td>{{ publicite.image }}</td>
-                <td>{{ publicite.etat ? 'Yes' : 'No' }}</td>
+                <td><img src="/uploads/{{ publicite.image }}" alt="{{ publicite.image }}" width="100" height="100"></td>
+                <td>{{ publicite.etat ? 'active' : 'inactive' }}</td>
                 <td>
                     <a href="{{ path('publicite_show', {'id': publicite.id}) }}">show</a>
                     <a href="{{ path('publicite_edit', {'id': publicite.id}) }}">edit</a>

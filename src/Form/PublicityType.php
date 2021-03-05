@@ -6,6 +6,7 @@ use App\Entity\Publicite;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class PublicityType extends AbstractType
 {
@@ -15,7 +16,13 @@ class PublicityType extends AbstractType
             ->add('content')
             ->add('date_debut')
             ->add('date_fin')
-            ->add('image')
+            ->add('imagefilename',FileType::class,[
+                'mapped' => false,
+                'attr'=>[
+
+                    'class'=>"form-control-file"
+                ]
+            ])
             ->add('etat')
         ;
     }

@@ -35,6 +35,20 @@ class PubliciteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $form['imagefilename']->getData();
+            $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+            $uploadedFile->move(
+                $destination,
+                $newFilename
+            );
+            $publicite->setImage($newFilename);
+
+
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($publicite);
             $entityManager->flush();
@@ -67,7 +81,22 @@ class PubliciteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $form['imagefilename']->getData();
+            $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+            $uploadedFile->move(
+                $destination,
+                $newFilename
+            );
+            $publicite->setImage($newFilename);
+
+
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($publicite);
+            $entityManager->flush();
 
             return $this->redirectToRoute('publicite_index');
         }
