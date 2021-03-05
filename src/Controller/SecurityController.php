@@ -31,9 +31,11 @@ class SecurityController extends AbstractController
             $message = $session->get('message');
             $session->remove('message'); //on vide la variable message dans la session
             $return['message'] = $message; //on ajoute à l'array de paramètres notre message
+            return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('security/login.html.twig', $return);
+
+        return $this->render('log_in/index.html.twig', $return);
     }
 
     /**
@@ -42,5 +44,6 @@ class SecurityController extends AbstractController
     public function logout()
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        return $this->redirectToRoute('homepage');
     }
 }

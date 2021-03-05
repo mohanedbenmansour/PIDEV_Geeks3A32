@@ -176,6 +176,7 @@
                   </div>
                 </li>
                 <li>
+
                     {% if app.user %}
 
                         <div>
@@ -203,7 +204,15 @@
       </header>
 {% endblock %}
 
-        {% block body %}{% endblock %}
+<div class="container">
+    {% if message is defined %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endif %}
+    {% block body %}
+    {% endblock %}
+</div>
 
 
         {% block footer %} 
