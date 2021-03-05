@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publicite index{% endblock %}
+
+{% block body %}
+    <h1>Publicite index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Content</th>
+                <th>Date_debut</th>
+                <th>Date_fin</th>
+                <th>Image</th>
+                <th>Etat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for publicite in publicites %}
+            <tr>
+                <td>{{ publicite.id }}</td>
+                <td>{{ publicite.content }}</td>
+                <td>{{ publicite.dateDebut ? publicite.dateDebut|date('Y-m-d') : '' }}</td>
+                <td>{{ publicite.dateFin }}</td>
+                <td>{{ publicite.image }}</td>
+                <td>{{ publicite.etat ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('publicite_show', {'id': publicite.id}) }}">show</a>
+                    <a href="{{ path('publicite_edit', {'id': publicite.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('publicite_new') }}">Create new</a>
+{% endblock %}
