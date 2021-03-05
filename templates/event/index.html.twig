@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Events{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 1000px; width: 100%; font: 18px/1.5 sans-serif; }
+</style>
+
+<div class="search-sec">
+<div class="container">
+<div class="search-box">
+<form>
+<input type="text" name="search" placeholder="Search keywords">
+<button type="submit">Search</button>
+</form>
+</div>
+</div>
+</div>
+
+<main>
+
+<div class="main-section">
+<div class="container">
+<div class="main-section-data">
+<div class="row">
+<div class="col-lg-6">
+<div class="main-ws-sec">
+<div class="posts-section">
+
+{#<div class="btn-create">
+<ul>
+    <li>
+    <a class="post-jb active" href="{{ path('event_new') }}" title="">Create Event</a>
+    </li>
+</ul>
+</div>#}
+
+<div class="post-st">
+    <ul>
+        <li>
+        <a class="post-jb active" href="{{ path('event_new') }}" title="" 
+        style="margin-bottom:20px; margin-right: 150px">Create Event</a>
+        </li>
+    </ul>
+</div>
+
+{% for event in events %}
+<div class="post-bar">
+<div class="post_topbar">
+<div class="usy-dt">
+<img class="img-event" src="/uploads/{{ event.img }}" alt="{{ event.img }}" onclick="return confirm('Partipation done')" width= 50px alt="">
+<div class="usy-name">
+<h3>{{ event.name }}</h3>
+<span><img src="images/clock.png" alt=""> {{ event.datePub ? event.datePub|date('Y-m-d H:i:s') : '' }} </span>
+</div>
+</div>
+{% if uid == event.userID %}
+<div class="ed-opts">
+<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+<ul class="ed-options">
+<li><a href="{{ path('event_edit', {'id': event.id}) }}" title="">Edit Event</a></li>
+<li><form method="post" action="{{ path('event_delete', {'id': event.id}) }}" onsubmit="return confirm('Are you sure you want to delete this event?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
+    <button>Delete Event</button>
+</form>
+</li>
+<li><a href="#" title="">Report Event</a></li>
+</ul>
+</div>
+{% endif %}
+</div>
+<div class="epi-sec">
+<ul class="descp">
+<li><img src="images/icon9.png" alt=""><span>{{ event.lieu }}</span></li>
+<li><img src="images/icon10.png" alt=""><span>{{ event.dateEvent ? event.dateEvent|date('Y-m-d H:i:s') : '' }}</span></li>
+</ul>
+<ul class="bk-links">
+<li><a href="{{ path('add_participation', {'id': event.id}) }}" title="" class="bid_now">Participer</a></li>
+</ul>
+</div>
+<div class="job_descp">
+<h3>Simple Classified Site</h3>
+<ul class="job-dt">
+
+{% if (event.prix == 0 ) %} 
+    <li><span>FREE</span></li>
+   {% else %}
+<li><span>{{ event.prix }}DT</span></li>
+
+{% endif %} 
+
+</ul>
+<p>{{ event.description }}<a href="#" title="">view more</a></p>
+</div>
+<div class="job-status-bar">
+<ul class="like-com">
+<li>
+<a href="#" class="active"><i class="fas fa-heart"></i> Like</a>
+<img src="images/liked-img.png" alt="">
+<span>25</span>
+</li>
+<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comments 15</a></li>
+</ul>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+
+</main>
+
+{% endblock %}
