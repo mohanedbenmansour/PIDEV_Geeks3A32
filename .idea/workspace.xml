@@ -19,7 +19,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="970c4d55-80d3-4452-bb21-fd55b3b41ac0" name="Default Changelist" comment="" />
+    <list default="true" id="970c4d55-80d3-4452-bb21-fd55b3b41ac0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210304212048.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210304212358.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ProductType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.back.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.back.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/order/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/order/new.html.twig" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -169,6 +178,9 @@
       <workItem from="1614876127837" duration="100000" />
       <workItem from="1614876503511" duration="206000" />
       <workItem from="1614876865357" duration="21726000" />
+      <workItem from="1615234524836" duration="3289000" />
+      <workItem from="1615242580102" duration="4955000" />
+      <workItem from="1615315139204" duration="7766000" />
     </task>
     <servers />
   </component>
@@ -188,10 +200,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614893916455">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1615326417776">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1614893916455" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1615326417776" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1614897297884">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

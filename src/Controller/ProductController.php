@@ -2,17 +2,24 @@
 
 namespace App\Controller;
 
+use App\Entity\Images;
 use App\Entity\Product;
+use App\Entity\Category;
+
 use App\Form\ProductType;
+use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
+use phpDocumentor\Reflection\Types\ClassString;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * @Route("/product")
  */
+
 class ProductController extends AbstractController
 {
     /**
@@ -29,33 +36,60 @@ class ProductController extends AbstractController
      */
     public function indexShop(ProductRepository $productRepository): Response
     {
-        return $this->render('product/index.front.html.twig', [
+        /*return $this->render('product/index.front.html.twig', [
             'products' => $productRepository->findAll(),
-        ]);
+        ]);*/
+        $p=$productRepository->findAll();
+        dd()    ;
     }
     /**
      * @Route("/new", name="product_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request,CategoryRepository $categoryRepository): Response
     {
         $product = new Product();
+        $categories= $categoryRepository->findAll();
         $form = $this->createForm(ProductType::class, $product);
+       /* $form ->add('category', ChoiceType::class,array(
+            "choices"=>array(
+
+            )
+        ));*/
+
         $form->handleRequest($request);
 
+        $category = new Category();
+        $category->setName('Computer Peripherals');
+        $product->setCategory($category);
+
+
+
         if ($form->isSubmitted() && $form->isValid()) {
- /** @var UploadedFile $uploadedFile */
- $uploadedFile = $form['imagefilename']->getData();
- $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
- $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
- $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
- $uploadedFile->move(
-     $destination,
-     $newFilename
- );
- $product->setImage($newFilename);
-
-
             $entityManager = $this->getDoctrine()->getManager();
+
+            /** @var UploadedFile $uploadedFile */
+ $uploadedFiles = $form['imagefilename']->getData();
+ $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+ foreach ($uploadedFiles as $uploadedFile){
+     $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+     $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+     $uploadedFile->move(
+         $destination,
+         $newFilename
+     );
+     $image=new Images();
+     $image->setImageName($newFilename);
+     $entityManager->persist($image);
+
+     $product->addImage($image);
+ }
+
+
+            $product->setImage("0");
+
+
+            $entityManager->persist($category);
+
             $entityManager->persist($product);
             $entityManager->flush();
 
@@ -105,6 +139,7 @@ class ProductController extends AbstractController
                 $newFilename
             );
             $product->setImage($newFilename);
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();

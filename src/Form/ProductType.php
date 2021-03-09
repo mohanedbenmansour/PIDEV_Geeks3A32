@@ -2,9 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use phpDocumentor\Reflection\Types\Integer;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -36,7 +39,8 @@ class ProductType extends AbstractType
                 'attr'=>[
 
                     'class'=>"form-control-file"
-                ]
+                ],
+                'multiple'=>true
             ])
 
             ->add('type',TextType::class,[
@@ -60,6 +64,18 @@ class ProductType extends AbstractType
                     'class'=>"form-control"
                 ]
             ])
+->add('category', EntityType::class, [
+        // looks for choices from this entity
+        'class' => Category::class,
+
+        'choice_label' => 'name',
+        'attr'=>[
+            'class'=>"form-control"
+        ]
+
+    ]
+
+)
         ;
     }
 

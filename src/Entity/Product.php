@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
@@ -53,6 +55,22 @@ class Product
      * @Assert\GreaterThan(0)
      */
     private $price;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Images::class, inversedBy="products")
+     */
+    private $images;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -127,6 +145,42 @@ class Product
     public function setPrice(int $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Images[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Images $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): self
+    {
+        $this->images->removeElement($image);
 
         return $this;
     }
