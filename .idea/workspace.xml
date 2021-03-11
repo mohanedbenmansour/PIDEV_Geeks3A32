@@ -20,14 +20,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="970c4d55-80d3-4452-bb21-fd55b3b41ac0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/css/multi.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/shop.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/multi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/shop.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/cart/test.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/cart/test1.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/cart/test2.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/cart/test3.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/product/test.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/geeks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/geeks.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210304212048.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210304212358.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210308234141.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20210308234141.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CartController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/LogInController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/LogInController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Order.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ProductType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.back.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.back.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/order/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/order/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/OrderType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/OrderType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/index.front.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/index.front.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,6 +160,7 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
       <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
       <path value="$PROJECT_DIR$/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/vendor/stripe/stripe-php" />
     </include_path>
   </component>
   <component name="ProjectId" id="1pFSPB64Ax8buOhcgweOmYH4CGc" />
@@ -155,7 +172,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/cart" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -164,6 +181,11 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mohan\Desktop\pidev\geeks\templates\cart" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -180,7 +202,13 @@
       <workItem from="1614876865357" duration="21726000" />
       <workItem from="1615234524836" duration="3289000" />
       <workItem from="1615242580102" duration="4955000" />
-      <workItem from="1615315139204" duration="7766000" />
+      <workItem from="1615315139204" duration="13576000" />
+      <workItem from="1615368646657" duration="13476000" />
+      <workItem from="1615404259516" duration="4442000" />
+      <workItem from="1615414904113" duration="593000" />
+      <workItem from="1615446717202" duration="2648000" />
+      <workItem from="1615478900725" duration="9702000" />
+      <workItem from="1615492964451" duration="569000" />
     </task>
     <servers />
   </component>
@@ -200,13 +228,29 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1615326417776">
+    <state x="450" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1615372981608">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1615326417776" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1614897297884">
+    <state x="450" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1615372981608" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1615481829848">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1614897297884" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1615481829848" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1615333983756">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1615333983756" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1615333980234">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1615333980234" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1615370693832">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1615370693832" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1615378809096">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1615378809096" />
   </component>
 </project>

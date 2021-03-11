@@ -18,9 +18,9 @@ class OrderType extends AbstractType
 
 
             ->add('userAdress',TextType::class,[
-                'label'=>"adress",
+                'label'=>"street adress",
                 'attr'=>[
-                    "placeholder"=>"enter your adress",
+                    "placeholder"=>"street and number,appartement",
                     'class'=>"form-control"
                 ]
             ])
@@ -31,6 +31,30 @@ class OrderType extends AbstractType
                     'class'=>"form-control"
                 ]
             ])
+
+            ->add('city',IntegerType::class,[
+                'label'=>"city",
+                'attr'=>[
+                    "placeholder"=>"",
+                    'class'=>"form-control"
+                ]
+            ])
+            ->add('state',IntegerType::class,[
+                'label'=>"state/province/region",
+                'attr'=>[
+                    "placeholder"=>"",
+                    'class'=>"form-control"
+                ]
+            ])
+            ->add('zipcode',IntegerType::class,[
+                'label'=>"zipcode",
+                'attr'=>[
+                    "placeholder"=>"",
+                    'class'=>"form-control"
+                ]
+            ])
+
+
         ;
     }
 

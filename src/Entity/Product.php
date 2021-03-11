@@ -67,6 +67,11 @@ class Product
      */
     private $images;
 
+    /**
+     * @ORM\OneToOne(targetEntity=OrderDetail::class, mappedBy="product", cascade={"persist", "remove"})
+     */
+    private $orderDetail;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -181,6 +186,28 @@ class Product
     public function removeImage(Images $image): self
     {
         $this->images->removeElement($image);
+
+        return $this;
+    }
+
+    public function getOrderDetail(): ?OrderDetail
+    {
+        return $this->orderDetail;
+    }
+
+    public function setOrderDetail(?OrderDetail $orderDetail): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($orderDetail === null && $this->orderDetail !== null) {
+            $this->orderDetail->setProduct(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($orderDetail !== null && $orderDetail->getProduct() !== $this) {
+            $orderDetail->setProduct($this);
+        }
+
+        $this->orderDetail = $orderDetail;
 
         return $this;
     }

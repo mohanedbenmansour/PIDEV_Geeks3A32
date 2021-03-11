@@ -13,6 +13,7 @@ use phpDocumentor\Reflection\Types\ClassString;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -27,6 +28,7 @@ class ProductController extends AbstractController
      */
     public function index(ProductRepository $productRepository): Response
     {
+
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
         ]);
@@ -34,13 +36,17 @@ class ProductController extends AbstractController
     /**
      * @Route("/shop", name="product_front_index", methods={"GET"})
      */
-    public function indexShop(ProductRepository $productRepository): Response
-    {
-        /*return $this->render('product/index.front.html.twig', [
+    public function indexShop(ProductRepository $productRepository,SessionInterface $session): Response
+    {  $cart=$session->get("cart");
+    if(!$cart){
+        $number=0;
+    }else{
+        $number=count($cart);
+    }
+        return $this->render('product/index.front.html.twig', [
             'products' => $productRepository->findAll(),
-        ]);*/
-        $p=$productRepository->findAll();
-        dd()    ;
+            'number'=>$number
+        ]);
     }
     /**
      * @Route("/new", name="product_new", methods={"GET","POST"})
