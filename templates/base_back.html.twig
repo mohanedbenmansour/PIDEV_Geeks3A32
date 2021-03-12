@@ -17,7 +17,9 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/back/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/back/style1.css')}}" rel="stylesheet">
+
 
 </head>
 
@@ -86,9 +88,14 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href={{ path("event_back") }}>
+                <a class="nav-link" href={{ path("back_events") }}>
                     <i class="fas fa-fw fa-table"></i>
                     <span>Events</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href={{ path("back_categoriesevent") }}>
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Categories</span></a>
             </li>
 
             <!-- Divider -->

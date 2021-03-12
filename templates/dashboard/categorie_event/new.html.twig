@@ -1,0 +1,13 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Create Category{% endblock %}
+
+{% block body %}
+    <div class="post-project" style="width:500px; margin-left:400px">
+        <h3>Create category</h3>
+        <div class="post-project-fields">
+            {{ include('dashboard/categorie_event/_form.html.twig') }}
+            <a href="{{ path('back_categoriesevent') }}">Cancel</a>
+        </div>
+    </div>
+{% endblock %}

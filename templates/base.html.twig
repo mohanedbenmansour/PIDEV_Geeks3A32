@@ -10,20 +10,17 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/animate.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('css/line-awesome.css')}}" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{asset('css/line-awesome-font-awesome.min.css')}}"
-    />
-    <link
-      href="{{asset('vendor/fontawesome-free/css/all.min.css')}}"
-      rel="stylesheet"
-      type="text/css"
-    />
+    {# <link rel="stylesheet" type="text/css" href="{{asset('css/events.css')}}" /> #}
+
+    <link rel="stylesheet" type="text/css" href="{{asset('css/line-awesome-font-awesome.min.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('vendor/fontawesome-free/css/all.min.css')}}"/>
+
     <link rel="stylesheet" type="text/css" href="{{asset('css/font-awesome.min.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('lib/slick/slick.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('lib/slick/slick-theme.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('css/style1.css')}}" />
+
     <link rel="stylesheet" type="text/css" href="{{asset('css/responsive.css')}}" />
       {% endblock %}
 
@@ -45,7 +42,7 @@
           <div class="header-data">
             <div class="logo">
               <a href="index.html" title=""
-                ><img src="images/logo.png" alt=""
+                ><img src="{{asset('images/logo.png')}}" alt=""
               /></a>
             </div>
             <div class="search-bar">
@@ -58,13 +55,13 @@
               <ul>
                 <li>
                   <a href="index.html" title="">
-                    <span><img src="images/icon1.png" alt="" /></span>
+                    <span><img src="{{asset('images/icon1.png')}}" alt="" /></span>
                     Home
                   </a>
                 </li>
                 <li>
                   <a href="companies.html" title="">
-                    <span><img src="images/icon2.png" alt="" /></span>
+                    <span><img src="{{asset('images/icon2.png')}}" alt="" /></span>
                     Companies
                   </a>
                   <ul>
@@ -78,13 +75,13 @@
                 </li>
                 <li>
                   <a href="projects.html" title="">
-                    <span><img src="images/icon3.png" alt="" /></span>
+                    <span><img src="{{asset('images/icon3.png')}}" alt="" /></span>
                     Projects
                   </a>
                 </li>
                 <li>
                   <a href="profiles.html" title="">
-                    <span><img src="images/icon4.png" alt="" /></span>
+                    <span><img src="{{asset('images/icon4.png')}}" alt="" /></span>
                     Profiles
                   </a>
                   <ul>
@@ -100,13 +97,13 @@
                 </li>
                 <li>
                   <a href={{ path("event_index") }} title="">
-                    <span><img src="images/icon5.png" alt="" /></span>
+                    <span><img src="{{asset('images/icon5.png')}}" alt="" /></span>
                     Events
                   </a>
                 </li>
                 <li>
                   <a href="#" title="" class="not-box-openm">
-                    <span><img src="images/icon6.png" alt="" /></span>
+                    <span><img src="{{asset('images/icon6.png')}}" alt="" /></span>
                     Messages
                   </a>
                   <div class="notification-box msg" id="message">
@@ -117,7 +114,7 @@
                     <div class="nott-list">
                       <div class="notfication-details">
                         <div class="noty-user-img">
-                          <img src="images/resources/ny-img1.png" alt="" />
+                          <img src="" alt="" />
                         </div>
                         <div class="notification-info">
                           <h3>
@@ -132,7 +129,7 @@
                       </div>
                       <div class="notfication-details">
                         <div class="noty-user-img">
-                          <img src="images/resources/ny-img2.png" alt="" />
+                          <img src="" alt="" />
                         </div>
                         <div class="notification-info">
                           <h3>
@@ -144,7 +141,7 @@
                       </div>
                       <div class="notfication-details">
                         <div class="noty-user-img">
-                          <img src="images/resources/ny-img3.png" alt="" />
+                          <img src="" alt="" />
                         </div>
                         <div class="notification-info">
                           <h3>
@@ -166,7 +163,7 @@
                 </li>
                 <li>
                   <a href="#" title="" class="not-box-open">
-                    <span><img src="images/icon7.png" alt="" /></span>
+                    <span><img src="{{asset('images/icon7.png')}}" alt="" /></span>
                     Notification
                   </a>
                   <div class="notification-box noti" id="notification">
@@ -177,7 +174,7 @@
                     <div class="nott-list">
                       <div class="notfication-details">
                         <div class="noty-user-img">
-                          <img src="images/resources/ny-img1.png" alt="" />
+                          <img src="" alt="" />
                         </div>
                         <div class="notification-info">
                           <h3>
@@ -189,7 +186,7 @@
                       </div>
                       <div class="notfication-details">
                         <div class="noty-user-img">
-                          <img src="images/resources/ny-img2.png" alt="" />
+                          <img src="" alt="" />
                         </div>
                         <div class="notification-info">
                           <h3>
@@ -201,7 +198,7 @@
                       </div>
                       <div class="notfication-details">
                         <div class="noty-user-img">
-                          <img src="images/resources/ny-img3.png" alt="" />
+                          <img src="" alt="" />
                         </div>
                         <div class="notification-info">
                           <h3>
@@ -213,7 +210,7 @@
                       </div>
                       <div class="notfication-details">
                         <div class="noty-user-img">
-                          <img src="images/resources/ny-img2.png" alt="" />
+                          <img src="" alt="" />
                         </div>
                         <div class="notification-info">
                           <h3>
@@ -236,7 +233,7 @@
             </div>
             <div class="user-account">
               <div class="user-info">
-                <img src="images/resources/user.png" alt="" />
+                <img src="" alt="" />
                 <a href="#" title="">John</a>
                 <i class="la la-sort-down"></i>
               </div>
@@ -306,8 +303,8 @@
 <li><a href="#" title="">Language</a></li>
 <li><a href="#" title="">Copyright Policy</a></li>
 </ul>
-<p><img src="images/copy-icon2.png" alt="">Copyright 2019</p>
-<img class="fl-rgt" src="images/logo2.png" alt="">
+<p><img src="{{asset('images/copy-icon2.png')}}" alt="">Copyright 2019</p>
+<img class="fl-rgt" src="{{asset('images/logo.png')}}" style="width:14px" alt="">
 </div>
 </div>
 </footer>

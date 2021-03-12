@@ -22,9 +22,22 @@ class Event
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Name is required")
      */
-    private $datePub;
+    private $name;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message="Date Debut is required")
+     */
+    private $dateDebut;
+    
+    /**
+     * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message="Date Fin is required")
+     */
+    private $dateFin;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -33,26 +46,39 @@ class Event
     private $lieu;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text")
      * @Assert\NotBlank(message="Description is required")
      */
     private $description;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nbParticipants;
+    
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Prix is required")
+     * @Assert\GreaterThanOrEqual(0)
+     */
+    private $prix;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez charger une image")
+     * @Assert\File(mimeTypes={ "image/png","image/jpeg"})
      */
     private $img;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\NotBlank(message="Date Event is required")
+     * @ORM\Column(type="datetime")
      */
-    private $dateEvent;
+    private $datePub;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $userID;
+    private $userId;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -64,26 +90,20 @@ class Event
     private $url;
 
     /**
-     * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="objectId")
+     * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="event", orphanRemoval=true)
      */
-    private $participation;
+    private $participations;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Name is required")
+     * @ORM\ManyToOne(targetEntity=CategorieEvent::class, inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $name;
-
-    /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank(message="Prix is required")GreaterThanOrEqual
-     * @Assert\GreaterThanOrEqual(0)
-     */
-    private $prix;
+    private $Category;
+    
 
     public function __construct()
     {
-        $this->participation = new ArrayCollection();
+        $this->participations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -122,17 +142,6 @@ class Event
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
 
     public function getImg(): ?string
     {
@@ -146,78 +155,43 @@ class Event
         return $this;
     }
 
-    public function getDateEvent(): ?\DateTimeInterface
+    public function getDateDebut(): ?\DateTimeInterface
     {
-        return $this->dateEvent;
+        return $this->dateDebut;
     }
 
-    public function setDateEvent(?\DateTimeInterface $dateEvent): self
+    public function setDateDebut(?\DateTimeInterface $dateDebut): self
     {
-        $this->dateEvent = $dateEvent;
+        $this->dateDebut = $dateDebut;
 
         return $this;
     }
 
-    public function getUserID(): ?int
+    public function getNbParticipants(): ?int
     {
-        return $this->userID;
+        return $this->nbParticipants;
     }
 
-    public function setUserID(int $userID): self
+    public function setNbParticipants(int $nbParticipants): self
     {
-        $this->userID = $userID;
+        $this->nbParticipants = $nbParticipants;
 
         return $this;
     }
 
-    public function getUrl(): ?string
+    public function getUserId(): ?int
     {
-        return $this->url;
+        return $this->userId;
     }
 
-    public function setUrl(?string $url): self
+    public function setUserId(int $userId): self
     {
-        $this->url = $url;
+        $this->userId = $userId;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Participation[]
-     */
-    public function getParticipation(): Collection
-    {
-        return $this->participation;
-    }
-
-    public function addParticipation(): self
-    {
-            /*$participation= new Participation();
-            $participation->setObjectId($this->id);
-            $participation->setType(1);
-            $participation->setDate(new \DateTime());
-            $participation->setUserId($uid);*/
-        if (!$this->participation->contains($participation)) {
-            $this->participation[] = $participation;
-            $participation->setObjectId($this->id); 
-            
-        }
-
-        return $this;
-    }
-
-    public function removeParticipation(Participation $participation): self
-    {
-        if ($this->participation->removeElement($participation)) {
-            // set the owning side to null (unless already changed)
-            if ($participation->getObjectId() === $this) {
-                $participation->setObjectId(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
     public function getName(): ?string
     {
         return $this->name;
@@ -242,5 +216,84 @@ class Event
         return $this;
     }
 
+    public function getDateFin(): ?\DateTimeInterface
+    {
+        return $this->dateFin;
+    }
+
+    public function setDateFin(\DateTimeInterface $dateFin): self
+    {
+        $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): self
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participation[]
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->removeElement($participation)) {
+            // set the owning side to null (unless already changed)
+            if ($participation->getEvent() === $this) {
+                $participation->setEvent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCategory(): ?CategorieEvent
+    {
+        return $this->Category;
+    }
+
+    public function setCategory(?CategorieEvent $Category): self
+    {
+        $this->Category = $Category;
+
+        return $this;
+    }
+
     
 }
+

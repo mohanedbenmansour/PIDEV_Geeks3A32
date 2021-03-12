@@ -2,9 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\CategorieEvent;
 use App\Entity\Event;
+use App\Entity\Participation;
 use App\Form\EventType;
+use App\Repository\CategorieEventRepository;
+use App\Repository\ParticipationRepository;
 use App\Repository\EventRepository;
+
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,36 +25,53 @@ class EventController extends AbstractController
     /**
      * @Route("/", name="event_index", methods={"GET"})
      */
-    public function index(EventRepository $eventRepository): Response
+    public function index(Request $request,PaginatorInterface $paginator,CategorieEventRepository $categorieEventRepository): Response
     {
+        $now = new \DateTime();
+        $donnees = $this->getDoctrine()->getManager()
+            ->createQuery('SELECT e
+                FROM App\Entity\Event e
+                WHERE e.dateDebut > :now
+                ORDER BY e.dateDebut ASC')
+            ->setParameter('now', $now)->getResult();
+        $events = $paginator->paginate(
+            $donnees,
+            $request->query->getInt('page',1),
+            9);
         return $this->render('event/index.html.twig', [
-            'events' => $eventRepository->findAll(),
+            'events' => $events,
+            'categories' => $categorieEventRepository->findAll(),
             'uid' => self::$uid,
         ]);
     }
-
+    //$eventRepository->findAll()
     /**
-     * @Route("/back", name="event_back")
+     * @Route("/{id}/addparticipation", name="add_participation", methods={"GET"})
      */
-    public function backindex(EventRepository $eventRepository): Response
+    public function addParticipation(Request $request,EventRepository $eventRepository,$id
+    ): Response
     {
-        return $this->render('event/backindex.html.twig', [
-            'events' => $eventRepository->findAll(),
-        ]);
-    }
-
-     /**
-     * @Route("/back/{id}", name="back_event_delete", methods={"DELETE"})
-     */
-    public function backdelete(Request $request, Event $event): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($event);
-            $entityManager->flush();
+        $event=$eventRepository->find($id);
+        $nbr=0;
+        foreach ($event->getParticipations() as $p){
+            if($p->getUserId()==self::$uid){
+                $nbr++;
+            }
         }
+        if($nbr < $event->getNbParticipants()){
+            $participation = new Participation();
 
-        return $this->redirectToRoute('event_back');
+            $participation->setUserId(self::$uid);
+            $participation->setDate(new \DateTime());
+            $event->addParticipation($participation);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($participation);
+            $em->flush();
+
+            return $this->redirectToRoute('event_index');
+        }
+        else return $this->redirectToRoute('event_show');
     }
 
     /**
@@ -61,7 +84,7 @@ class EventController extends AbstractController
         $form->handleRequest($request);
 
         $event->setDatePub(new \DateTime());
-        $event->setUserID(1);
+        $event->setUserId(1);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -94,8 +117,22 @@ class EventController extends AbstractController
      */
     public function show(Event $event): Response
     {
+        $complet=false;
+        $result=false;
+        $nbr=0;
+        foreach ($event->getParticipations() as $p){
+            if($p->getUserId()==self::$uid){
+                $result=true;
+                $nbr++;
+            }
+        }
+        if($nbr >= $event->getNbParticipants())
+            $complet=true;
         return $this->render('event/show.html.twig', [
             'event' => $event,
+            'uid' => self::$uid,
+            'exist' => $result,
+            'complet' => $complet,
         ]);
     }
 
@@ -143,6 +180,7 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('event_index');
     }
+
 
    
 }

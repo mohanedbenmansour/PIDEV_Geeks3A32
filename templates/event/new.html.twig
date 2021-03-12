@@ -3,13 +3,11 @@
 {% block title %}New Event{% endblock %}
 
 {% block body %}
-    <div class="post-project" style="width:500px; margin-left:400px">
+    <div class="post-project" style="width:800px; margin-left:280px">
         <h3>Create an event</h3>
         <div class="post-project-fields">
 
         {{ include('event/_form.html.twig') }}
-
-        <a class="btn" href="{{ path('event_index') }}">Cancel</a>
         </div>
     </div>
 {% endblock %}

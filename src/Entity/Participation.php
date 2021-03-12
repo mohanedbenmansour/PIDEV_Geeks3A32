@@ -23,19 +23,15 @@ class Participation
     private $userId;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $objectId;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $type;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="participations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $event;
 
 
     public function getId(): ?int
@@ -55,30 +51,6 @@ class Participation
         return $this;
     }
 
-    public function getObjectId(): ?int
-    {
-        return $this->objectId;
-    }
-
-    public function setObjectId(int $objectId): self
-    {
-        $this->objectId = $objectId;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
@@ -87,6 +59,18 @@ class Participation
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getEvent(): ?Event
+    {
+        return $this->event;
+    }
+
+    public function setEvent(?Event $event): self
+    {
+        $this->event = $event;
 
         return $this;
     }
