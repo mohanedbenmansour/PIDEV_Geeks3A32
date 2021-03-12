@@ -10,10 +10,11 @@
             <tr>
                 <th>Id</th>
                 <th>UserId</th>
-                <th>OrderDetail</th>
                 <th>UserAdress</th>
                 <th>CheckoutDate</th>
                 <th>UserPhone</th>
+                <th>Products</th>
+
                 <th>actions</th>
             </tr>
             </thead>
@@ -22,14 +23,71 @@
                 <tr>
                     <td>{{ order.id }}</td>
                     <td>{{ order.userId }}</td>
-                    <td>{{ order.orderDetail }}</td>
                     <td>{{ order.userAdress }}</td>
                     <td>{{ order.checkoutDate }}</td>
-                    <td>{{ order.userPhone }}</td>
+                    <td>{% if order.status %} paid {% else %} waiting for confirmation {% endif%} </td>
+
+                    <td> <a data-toggle="modal" data-target="#exampleModalCenter{{ order.id }}"><i class="fas fa-eye" ></i>
+
+                        </a></td>
+
                     <td>
 
-                        <a class="btn btn-danger" href="{{ path("order_delete",{"id":order.id}) }}">delete</a>
-                    </td>
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter{{ order.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Products</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table>
+
+                                            <tr>
+                                                <th>product name</th>
+                                                <th>quantity</th>
+                                                <th>price</th>
+                                                <th>images</th>
+
+                                            </tr>
+
+                                            {% for detail in order.orderdetail %}
+                                                <tr>
+                                                    <td >{{ detail.product.name }}</td>
+                                                    <td >{{ detail.quantity }}</td>
+                                                    <td >{{ detail.product.price }}</td>
+                                                    <td>
+                                                        <img width="50" height="50" src="/uploads/{{ detail.product.images[0].imageName }}" alt="Slide Image">
+
+                                                    </td>
+
+                                                </tr>
+
+                                            {% endfor %}
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    {% if order.status  %}
+                        <a class="btn btn-danger" href="{{ path("download_pdf",{"id":order.id}) }}">pdf</a>
+
+                        {% else %}
+                            <a class="btn btn-success" href="{{ path("confirm_order",{"id":order.id}) }}">confirm</a>
+
+                            {% endif %}
+                            </td>
                 </tr>
             {% else %}
                 <tr>
@@ -41,4 +99,21 @@
 
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Products</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+
+            </div>
+        </div>
+    </div>
 {% endblock %}

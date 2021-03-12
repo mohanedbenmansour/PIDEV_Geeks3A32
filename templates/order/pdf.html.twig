@@ -1,0 +1,54 @@
+
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<h1>
+    invoice number #{{ order.id }}
+</h1>
+
+<h2>client:{{ order.userId }}</h2>
+<h2>client Number:{{ order.userId }}</h2>
+
+<hr>
+<table>
+
+    <tr>
+        <th>product name</th>
+        <th>quantity</th>
+        <th>price</th>
+        <th>payment methode</th>
+
+    </tr>
+
+    {% for detail in order.orderdetail %}
+        <tr>
+            <td >{{ detail.product.name }}</td>
+            <td >{{ detail.quantity }}</td>
+            <td >{{ detail.product.price }}</td>
+            <td >{{ detail.payment }}</td>
+
+        </tr>
+
+    {% endfor %}
+
+</table>
+<hr>
+<h2>total :{{ order.totalPrice }}</h2>
+
+
+

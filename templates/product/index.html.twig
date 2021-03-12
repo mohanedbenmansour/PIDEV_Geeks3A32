@@ -13,10 +13,9 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Quantity</th>
                 <th>Description</th>
-                <th>Image</th>
-                <th>Type</th>
+                <th>price</th>
+
                 <th>actions</th>
             </tr>
         </thead>
@@ -25,10 +24,7 @@
             <tr>
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
-                <td>{{ product.quantity }}</td>
                 <td>{{ product.description }}</td>
-                <td><img src="/uploads/{{ product.image }}" alt="{{ product.image }}" width="100" height="100"></td>
-                <td>{{ product.type }}</td>
                 <td>{{ product.price }}</td>
 
                 <td>

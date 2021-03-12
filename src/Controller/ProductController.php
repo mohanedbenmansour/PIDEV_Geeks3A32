@@ -54,20 +54,10 @@ class ProductController extends AbstractController
     public function new(Request $request,CategoryRepository $categoryRepository): Response
     {
         $product = new Product();
-        $categories= $categoryRepository->findAll();
         $form = $this->createForm(ProductType::class, $product);
-       /* $form ->add('category', ChoiceType::class,array(
-            "choices"=>array(
 
-            )
-        ));*/
 
         $form->handleRequest($request);
-
-        $category = new Category();
-        $category->setName('Computer Peripherals');
-        $product->setCategory($category);
-
 
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -91,10 +81,8 @@ class ProductController extends AbstractController
  }
 
 
-            $product->setImage("0");
 
 
-            $entityManager->persist($category);
 
             $entityManager->persist($product);
             $entityManager->flush();

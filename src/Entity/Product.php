@@ -25,12 +25,6 @@ class Product
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="quantity is required")
-     * @Assert\GreaterThan(0)
-     */
-    private $quantity;
 
     /**
      * @ORM\Column(type="text")
@@ -41,19 +35,8 @@ class Product
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $image;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="type is required")
-     */
-    private $type;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="price is required")
-     * @Assert\GreaterThan(0)
-     */
     private $price;
 
     /**
@@ -68,8 +51,9 @@ class Product
     private $images;
 
     /**
-     * @ORM\OneToOne(targetEntity=OrderDetail::class, mappedBy="product", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=OrderDetail::class, mappedBy="product")
      */
+
     private $orderDetail;
 
     public function __construct()

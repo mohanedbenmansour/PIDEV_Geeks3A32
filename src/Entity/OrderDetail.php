@@ -17,10 +17,6 @@ class OrderDetail
      */
     private $id;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Product::class, inversedBy="orderDetail", cascade={"persist", "remove"})
-     */
-    private $product;
 
     /**
      * @ORM\Column(type="integer")
@@ -36,6 +32,11 @@ class OrderDetail
      * @ORM\ManyToOne(targetEntity=Order::class, inversedBy="orderdetail")
      */
     private $Orderr;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="orderDetail")
+     */
+    private $product;
 
     public function getId(): ?int
     {

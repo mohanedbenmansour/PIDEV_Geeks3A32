@@ -90,7 +90,7 @@ class CartController extends AbstractController
      * @Route("/success", name="successPayment")
      */
     public function success(SessionInterface $session,ProductRepository $productRepository,Request $request): Response
-    {              $orderDetail=new OrderDetail();
+    {
         $order = new Order();
         $entityManager = $this->getDoctrine()->getManager();
         $cart=$session->get("cart");
@@ -111,6 +111,7 @@ class CartController extends AbstractController
             $total=0;
             foreach ($cartWithData as $item){
                 $total+=$item["product"]->getPrice()*$item["quantity"];
+                $orderDetail=new OrderDetail();
                 $orderDetail->setPayment("stripe");
                 $orderDetail->setProduct($item["product"]);
                 $orderDetail->setQuantity($item["quantity"]);
@@ -123,12 +124,11 @@ class CartController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
 
-                $order->setOrderDetail("0");
-                $order->setStatus("done");
+                $order->setStatus(1);
                 $date=new \DateTime();
                 $order->setCheckoutDate($date->format('Y-m-d H:i:s'));
                 $order->setUserId(1);
-
+$order->setTotalPrice($total);
 
                 $entityManager->persist($order);
                 $entityManager->flush();
@@ -148,7 +148,7 @@ class CartController extends AbstractController
      * @Route("/success2", name="successPayment2")
      */
     public function success2(SessionInterface $session,ProductRepository $productRepository,Request $request): Response
-    {              $orderDetail=new OrderDetail();
+    {
         $order = new Order();
         $entityManager = $this->getDoctrine()->getManager();
         $cart=$session->get("cart");
@@ -169,6 +169,7 @@ class CartController extends AbstractController
             $total=0;
             foreach ($cartWithData as $item){
                 $total+=$item["product"]->getPrice()*$item["quantity"];
+                $orderDetail=new OrderDetail();
                 $orderDetail->setPayment("pay on delivery");
                 $orderDetail->setProduct($item["product"]);
                 $orderDetail->setQuantity($item["quantity"]);
@@ -181,12 +182,11 @@ class CartController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
 
-                $order->setOrderDetail("0");
-                $order->setStatus("done");
+                $order->setStatus(0);
                 $date=new \DateTime();
                 $order->setCheckoutDate($date->format('Y-m-d H:i:s'));
                 $order->setUserId(1);
-
+                $order->setTotalPrice($total);
 
                 $entityManager->persist($order);
                 $entityManager->flush();

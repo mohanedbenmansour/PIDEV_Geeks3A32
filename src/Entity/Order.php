@@ -6,6 +6,7 @@ use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
@@ -25,10 +26,6 @@ class Order
      */
     private $userId;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $orderDetail;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -49,7 +46,7 @@ class Order
     private $userPhone;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean", length=255)
      */
     private $status;
 
@@ -73,6 +70,11 @@ class Order
      */
     private $orderdetail;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $totalPrice;
+
     public function __construct()
     {
         $this->orderdetail = new ArrayCollection();
@@ -95,17 +97,8 @@ class Order
         return $this;
     }
 
-    public function getOrderDetail(): ?string
-    {
-        return $this->orderDetail;
-    }
 
-    public function setOrderDetail(string $orderDetail): self
-    {
-        $this->orderDetail = $orderDetail;
 
-        return $this;
-    }
 
     public function getUserAdress(): ?string
     {
@@ -143,12 +136,12 @@ class Order
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): ?bool
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): self
+    public function setStatus(bool $status): self
     {
         $this->status = $status;
 
@@ -211,5 +204,24 @@ class Order
         }
 
         return $this;
+    }
+
+    public function getTotalPrice(): ?int
+    {
+        return $this->totalPrice;
+    }
+
+    public function setTotalPrice(int $totalPrice): self
+    {
+        $this->totalPrice = $totalPrice;
+
+        return $this;
+    }
+    /**
+     * @return Collection|OrderDetail[]
+     */
+    public function getOrderdetail(): Collection
+    {
+        return $this->orderdetail;
     }
 }

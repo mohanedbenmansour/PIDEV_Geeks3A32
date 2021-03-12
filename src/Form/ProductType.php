@@ -26,13 +26,7 @@ class ProductType extends AbstractType
                     'class'=>"form-control"
                 ]
             ])
-            ->add('quantity',IntegerType::class,[
-                'label'=>"quantity",
-                'attr'=>[
-                    "placeholder"=>"add quantity",
-                    'class'=>"form-control"
-                ]
-            ])
+
             
             ->add('imagefilename',FileType::class,[
                 'mapped' => false,
@@ -43,13 +37,7 @@ class ProductType extends AbstractType
                 'multiple'=>true
             ])
 
-            ->add('type',TextType::class,[
-                'label'=>"type",
-                'attr'=>[
-                    "placeholder"=>"add type",
-                    'class'=>"form-control"
-                ]
-            ])
+
             ->add('price',IntegerType::class,[
                 'label'=>"price",
                 'attr'=>[
