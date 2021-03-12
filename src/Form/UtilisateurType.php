@@ -9,6 +9,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 //ajout du use pour utiliser le type input password de Symfony
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
 
 class UtilisateurType extends AbstractType
 {
@@ -18,9 +24,11 @@ class UtilisateurType extends AbstractType
             ->add('username')
             ->add('email',EmailType::class)
             ->add('phoneNumber')
+            
             // suppression du role qui sera défini par défaut
             ->add('password', PasswordType::class
             )
+            
         ;
     }
 

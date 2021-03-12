@@ -20,9 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86df37ae-2616-47da-b598-382cc08783a9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/utilisateur/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/utilisateur/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Utilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Utilisateur.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,6 +164,16 @@
       <workItem from="1614879944045" duration="18331000" />
       <workItem from="1614930908706" duration="1540000" />
       <workItem from="1614935089419" duration="4373000" />
+      <workItem from="1614944310682" duration="1920000" />
+      <workItem from="1614948922381" duration="958000" />
+      <workItem from="1615069405177" duration="636000" />
+      <workItem from="1615140813081" duration="1193000" />
+      <workItem from="1615240516250" duration="433000" />
+      <workItem from="1615241297904" duration="709000" />
+      <workItem from="1615326378031" duration="948000" />
+      <workItem from="1615328104335" duration="834000" />
+      <workItem from="1615329026259" duration="596000" />
+      <workItem from="1615394705448" duration="38000" />
     </task>
     <servers />
   </component>
@@ -180,6 +190,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="530" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1614893571788">

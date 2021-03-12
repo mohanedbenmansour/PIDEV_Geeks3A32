@@ -3,34 +3,31 @@
 {% block title %}Utilisateur{% endblock %}
 
 {% block body %}
-    <h1>Utilisateur</h1>
+    <h1>Profil</h1>
 
     <table class="table">
         <tbody>
         <tr>
-            <th>Id</th>
-            <td>{{ utilisateur.id }}</td>
+            <th>Photo de profil</th>
+            <td><img src="/uploads/{{ utilisateur.image }}" alt="{{ utilisateur.image }}" width="100" height="100"></td>
         </tr>
+        
         <tr>
-            <th>Username</th>
+            <th>Nickname</th>
             <td>{{ utilisateur.username }}</td>
         </tr>
+        
+        
         <tr>
-            <th>Roles</th>
-            <td>{{ utilisateur.roles ? utilisateur.roles|json_encode : '' }}</td>
-        </tr>
-        <tr>
-            <th>Password</th>
-            <td></td>
-        </tr>
-        <tr>
-            <th>email</th>
+            <th>Email</th>
             <td>{{ utilisateur.email }}</td>
         </tr>
         <tr>
-            <th>Username</th>
+            <th>Phone Number</th>
             <td>{{ utilisateur.phoneNumber }}</td>
         </tr>
+        
+        
         </tbody>
     </table>
 

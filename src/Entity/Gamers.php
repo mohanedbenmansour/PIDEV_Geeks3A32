@@ -32,6 +32,11 @@ class Gamers
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $playerPhoto;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Gamers
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getPlayerPhoto(): ?string
+    {
+        return $this->playerPhoto;
+    }
+
+    public function setPlayerPhoto(?string $playerPhoto): self
+    {
+        $this->playerPhoto = $playerPhoto;
 
         return $this;
     }

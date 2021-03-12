@@ -18,6 +18,15 @@
                 {{ form_widget(form.password) }}
             </div>
             <div class="col-12">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="col-12">
+                {{ form_label(form.phoneNumber) }}
+                {{ form_widget(form.phoneNumber) }}
+            </div>
+            
+            <div class="col-12">
                 <label for="verifpass">Saisir une seconde fois le mot de passe</label>
                 <input type="password" id="verifpass" required>
             </div>

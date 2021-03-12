@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
+use App\Security\EmailVerifier;
 use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,12 +12,27 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mailer\MailerInterface;
+use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 /**
  * @Route("/utilisateur")
  */
 class UtilisateurController extends AbstractController
 {
+   /* private $emailVerifier;
+
+    public function __construct(EmailVerifier $emailVerifier)
+    {
+        $this->emailVerifier = $emailVerifier;
+    }
+    */
+    
     /**
      * @Route("/", name="utilisateur_index", methods={"GET"})
      */
@@ -39,6 +55,7 @@ class UtilisateurController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
+    
     /**
      * @Route("/new", name="utilisateur_new", methods={"GET","POST"})
      */
@@ -60,11 +77,22 @@ class UtilisateurController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $utilisateur->setPassword($passwordEncoder->encodePassword($utilisateur, $utilisateur->getPassword()));
+            
             /* uniquement pour créer un admin
             $role = ['ROLE_ADMIN'];
             $utilisateur->setRoles($role); */
             $entityManager->persist($utilisateur);
             $entityManager->flush();
+
+            // generate a signed url and email it to the user
+        /*    $this->emailVerifier->sendEmailConfirmation('app_verify_email', $utilisateur,
+                (new TemplatedEmail())
+                    ->from(new Address('geek.admin@esprit.tn', 'geek bot'))
+                    ->to($utilisateur->getEmail())
+                    ->subject('Please Confirm your Email')
+                    ->htmlTemplate('registration/confirmation_email.html.twig')
+            );
+            */
 
             return $this->redirectToRoute('utilisateur_index');
         }
@@ -74,6 +102,30 @@ class UtilisateurController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/verify/email", name="app_verify_email")
+     */
+    /*
+    public function verifyUserEmail(Request $request): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // validate email confirmation link, sets User::isVerified=true and persists
+        try {
+            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+        } catch (VerifyEmailExceptionInterface $exception) {
+            $this->addFlash('verify_email_error', $exception->getReason());
+
+            return $this->redirectToRoute('utilisateur_index');
+        }
+
+        // @TODO Change the redirect on success and handle or remove the flash message in your templates
+        $this->addFlash('success', 'Your email address has been verified.');
+
+        return $this->redirectToRoute('utilisateur_index');
+    }
+    */
 
     /**
      * @Route("/{id}", name="utilisateur_show", methods={"GET"})
@@ -98,11 +150,43 @@ class UtilisateurController extends AbstractController
             $session->set("message", "Vous ne pouvez pas modifier cet utilisateur");
             return $this->redirectToRoute('membre');
         }
+        
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
+        $form->add('imageFile', FileType::class, [
+            'mapped' => false
+        ]);
+        $form->add('coverFile', FileType::class, [
+            'mapped' => false
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $utilisateur->setPassword($passwordEncoder->encodePassword($utilisateur, $utilisateur->getPassword()));
+//photo de profil
+
+            /** @var UploadedFile $uploadedFile */
+ $uploadedFile = $form['imageFile']->getData();
+ $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+ $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+ $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+ $uploadedFile->move(
+     $destination,
+     $newFilename
+ );
+ $utilisateur->setImage($newFilename);
+
+//photo de couverture
+ /** @var UploadedFile $uploadedFile */
+ $uploadedFile = $form['coverFile']->getData();
+ $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+ $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+ $newCovername = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+ $uploadedFile->move(
+     $destination,
+     $newCovername
+ );
+ $utilisateur->setPhotocover($newCovername);
+ 
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('utilisateur_index');

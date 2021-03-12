@@ -8,17 +8,20 @@
           <div class="container">
             <div class="main-section-data">
               <div class="row">
+              {% if app.user %}
                 <div class="col-lg-3 col-md-4 pd-left-none no-pd">
                   <div class="main-left-sidebar no-margin">
                     <div class="user-data full-width">
                       <div class="user-profile">
                         <div class="username-dt">
                           <div class="usr-pic">
-                            <img src="images/resources/user-pic.png" alt="" />
+                          
+                            <img src="/uploads/{{ app.user.image }}" alt="{{ app.user.image }}" width="100" height="100">
+                            
                           </div>
                         </div>
                         <div class="user-specs">
-                          <h3>John Doe</h3>
+                          <h3>{{ app.user.username }}</h3>
                           <span>Graphic Designer at Self Employed</span>
                         </div>
                       </div>
@@ -32,11 +35,7 @@
                           <span>155</span>
                         </li>
                         <li>
-                          <a
-                            href="https://www.gambolthemes.net/workwise-new/my-profile.html"
-                            title=""
-                            >View Profile</a
-                          >
+                          <a href="{{ path('profil', {'id': app.user.id}) }}">View Profil</a>
                         </li>
                       </ul>
                     </div>
@@ -117,12 +116,14 @@
                     </div>
                   </div>
                 </div>
+                
                 <div class="col-lg-6 col-md-8 no-pd">
                   <div class="main-ws-sec">
                     <div class="post-topbar">
                       <div class="user-picy">
-                        <img src="images/resources/user-pic.png" alt="" />
+                        <img src="/uploads/{{ app.user.image }}" alt="{{ app.user.image }}">
                       </div>
+                      {% endif %}
                       <div class="post-st">
                         <ul>
                           <li>
