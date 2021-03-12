@@ -23,6 +23,7 @@ class CartController extends AbstractController
      */
     public function index(SessionInterface $session,ProductRepository $productRepository): Response
     {
+
         $cart=$session->get("cart");
         if(!$cart){
             return $this->render('cart/test.html.twig', [
@@ -132,7 +133,7 @@ $order->setTotalPrice($total);
 
                 $entityManager->persist($order);
                 $entityManager->flush();
-
+                $session->remove("cart");
                 return $this->redirectToRoute('done');
             }
 
@@ -190,7 +191,7 @@ $order->setTotalPrice($total);
 
                 $entityManager->persist($order);
                 $entityManager->flush();
-
+                $session->remove("cart");
                 return $this->redirectToRoute('done');
             }
 
@@ -237,29 +238,13 @@ $order->setTotalPrice($total);
      */
     public function done(SessionInterface $session,ProductRepository $productRepository): Response
     {
-        $cart=$session->get("cart");
-        if(!$cart){
-            return $this->render('cart/test.html.twig', [
+
+
+            return $this->render('cart/test3.html.twig', [
                 "items"=>0,
                 "total"=>"0"
             ]);
-        }else {
-            $cartWithData=[];
-            foreach ($cart as $id=>$quantity){
-                $cartWithData[]=[
-                    "product"=>$productRepository->find($id),
-                    "quantity"=>$quantity
-                ];
-            }
-            $total=0;
-            foreach ($cartWithData as $item){
-                $total+=$item["product"]->getPrice()*$item["quantity"];
-            }
-            return $this->render('cart/test3.html.twig', [
-                "items"=>$cartWithData,
-                "total"=>$total
-            ]);
-        }
+
     }
 
 }

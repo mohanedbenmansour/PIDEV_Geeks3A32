@@ -32,14 +32,14 @@ class OrderType extends AbstractType
                 ]
             ])
 
-            ->add('city',IntegerType::class,[
+            ->add('city',TextType::class,[
                 'label'=>"city",
                 'attr'=>[
                     "placeholder"=>"",
                     'class'=>"form-control"
                 ]
             ])
-            ->add('state',IntegerType::class,[
+            ->add('state',TextType::class,[
                 'label'=>"state/province/region",
                 'attr'=>[
                     "placeholder"=>"",
