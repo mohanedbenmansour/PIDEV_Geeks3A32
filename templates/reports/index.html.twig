@@ -9,7 +9,6 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Type</th>
                 <th>Object_id</th>
                 <th>Etat</th>
                 <th>Content</th>
@@ -20,7 +19,6 @@
         {% for report in reports %}
             <tr>
                 <td>{{ report.id }}</td>
-                <td>{{ report.type }}</td>
                 <td>{{ report.objectId }}</td>
                 <td>{{ report.etat ? 'Yes' : 'No' }}</td>
                 <td>{{ report.content }}</td>

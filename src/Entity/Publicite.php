@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PubliciteRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PubliciteRepository::class)
@@ -19,16 +20,19 @@ class Publicite
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="CONTENT is required")
      */
     private $content;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(message="DATE_DEBUT is required")
      */
     private $date_debut;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="date")
+     * @Assert\NotBlank(message="DATE_FIN is required")
      */
     private $date_fin;
 
@@ -71,12 +75,12 @@ class Publicite
         return $this;
     }
 
-    public function getDateFin(): ?string
+    public function getDateFin(): ?\DateTimeInterface
     {
         return $this->date_fin;
     }
 
-    public function setDateFin(string $date_fin): self
+    public function setDateFin(\DateTimeInterface $date_fin): self
     {
         $this->date_fin = $date_fin;
 

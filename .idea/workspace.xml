@@ -2,10 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0887bbdf-2826-436f-a961-76713b31479b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/images/resources/thumb-1920-671473.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/wd-logoo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/PubliciteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PubliciteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210304113956.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/animate.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/animate.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/flatpickr.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/flatpickr.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/font-awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/font-awesome.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/jquery.mCustomScrollbar.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/jquery.mCustomScrollbar.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/line-awesome-font-awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/line-awesome-font-awesome.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/line-awesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/line-awesome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/fontawesome-webfont3e6e.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont3e6e.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/line-awesomeeb4f.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/line-awesomeeb4f.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/flatpickr.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/flatpickr.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/jquery.mCustomScrollbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/jquery.mCustomScrollbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/jquery.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/jquery.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/jquery.range-min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/jquery.range-min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/lib/slick/fonts/slick.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/lib/slick/fonts/slick.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/lib/slick/slick.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/lib/slick/slick.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/fontawesome-free/css/all.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/fontawesome-free/css/all.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/fontawesome-free/webfonts/fa-brands-400.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/fontawesome-free/webfonts/fa-brands-400.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/fontawesome-free/webfonts/fa-regular-400.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/fontawesome-free/webfonts/fa-regular-400.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/fontawesome-free/webfonts/fa-solid-900.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/fontawesome-free/webfonts/fa-solid-900.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/HomePageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomePageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Publicite.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Publicite.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Reports.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Reports.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/PublicityType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PublicityType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ReportsType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ReportsType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home_page/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home_page/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/publicite/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/publicite/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/publicite/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/publicite/edit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/publicite/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/publicite/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/publicite/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/publicite/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/publicite/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/publicite/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/reports/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/reports/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/reports/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/reports/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,6 +169,12 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\pidev\PIDEV_Geeks3A32\public\images" />
+      <recent name="C:\wamp64\www\pidev\PIDEV_Geeks3A32\public\images\resources" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -145,7 +185,12 @@
       <updated>1614857034079</updated>
       <workItem from="1614857051954" duration="7937000" />
       <workItem from="1614883988087" duration="2249000" />
-      <workItem from="1614935229509" duration="3991000" />
+      <workItem from="1614935229509" duration="7267000" />
+      <workItem from="1615476195956" duration="702000" />
+      <workItem from="1615477832303" duration="4649000" />
+      <workItem from="1615559312731" duration="551000" />
+      <workItem from="1615637231016" duration="6667000" />
+      <workItem from="1615651583112" duration="6596000" />
     </task>
     <servers />
   </component>
@@ -153,9 +198,21 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="363" y="99" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1615476668096">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="363" y="99" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1366.728@0.0.1366.728" timestamp="1615476668096" />
     <state x="340" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1614870437103">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="340" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1614870437103" />
+    <state x="463" y="105" key="FileChooserDialogImpl" timestamp="1614946997357">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1614946997357" />
+    <state x="389" y="0" width="587" height="728" key="find.popup" timestamp="1615640797849">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="389" y="0" width="587" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1615640797849" />
   </component>
 </project>
