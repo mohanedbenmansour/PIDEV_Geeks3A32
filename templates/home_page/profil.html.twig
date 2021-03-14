@@ -5,7 +5,7 @@
 {% block body %}
 {% if app.user %}
 <section class="cover-sec">
-<img src="/uploads/{{ app.user.Photocover }}" alt="{{ app.user.Photocover }}"  height="200">
+<img src="/uploads/{{ app.user.Photocover }}" alt="{{ app.user.Photocover }}"  height="300">
 <div class="add-pic-box">
 <div class="container">
 <div class="row no-gutters">
@@ -46,14 +46,14 @@
 </ul>
 </div>
 <ul class="social_links">
-<li><a href="#" title=""><i class="la la-globe"></i> www.example.com</a></li>
-<li><a href="#" title=""><i class="fa fa-facebook-square"></i> Http://www.facebook.com/john...</a></li>
+<li><a href="#" title=""><i class="la la-globe"></i> {{ app.user.twitchProfil }}</a></li>
+<li><a href="#" title=""><i class="fa fa-facebook-square"></i> {{ app.user.twitchProfil }}</a></li>
 <li><a href="#" title=""><i class="fa fa-twitter"></i> Http://www.Twitter.com/john...</a></li>
 <li><a href="#" title=""><i class="fa fa-google-plus-square"></i> Http://www.googleplus.com/john...</a></li>
 <li><a href="#" title=""><i class="fa fa-behance-square"></i> Http://www.behance.com/john...</a></li>
 <li><a href="#" title=""><i class="fa fa-pinterest"></i> Http://www.pinterest.com/john...</a></li>
-<li><a href="#" title=""><i class="fa fa-instagram"></i> Http://www.instagram.com/john...</a></li>
-<li><a href="#" title=""><i class="fa fa-youtube"></i> Http://www.youtube.com/john...</a></li>
+<li><a href="#" title=""><i class="fa fa-instagram"></i> {{ app.user.twitchProfil }}</a></li>
+<li><a href="#" title=""><i class="fa fa-youtube"></i> {{ app.user.youtubeChannel }}</a></li>
 </ul>
 </div>
 <div class="suggestions full-width">
@@ -1468,8 +1468,16 @@
 </div>
 <div class="user-profile-ov st2">
 <h3><a href="#" title="" class="exp-bx-open">infos </a><a href="#" title="" class="exp-bx-open"><i class="fa fa-pencil"></i></a> <a href="#" title="" class="exp-bx-open"><i class="fa fa-plus-square"></i></a></h3>
-<h4>phone Number <a href="#" title=""><i class="fa fa-pencil"></i></a></h4>
-<p>{{ app.user.phoneNumber }}</p>
+<h4>Nom <a href="#" title=""><i class="fa fa-pencil"></i></a></h4>
+<p>{{ app.user.nom }}</p>
+<h4>Prenom <a href="#" title=""><i class="fa fa-pencil"></i></a></h4>
+<p>{{ app.user.prenom }}</p>
+<h4>Facebook profil <a href="#" title=""><i class="fa fa-pencil"></i></a></h4>
+<p>{{ app.user.facebookprofil }}</p>
+<h4>Twitch channel <a href="#" title=""><i class="fa fa-pencil"></i></a></h4>
+<p>{{ app.user.twitchProfil }}</p>
+<h4>Youtube channel <a href="#" title=""><i class="fa fa-pencil"></i></a></h4>
+<p>{{ app.user.youtubeChannel }}</p>
 <h4>Email<a href="#" title=""><i class="fa fa-pencil"></i></a></h4>
  <p>{{ app.user.email }}</p>
 <h4>PHP developer <a href="#" title=""><i class="fa fa-pencil"></i></a></h4>

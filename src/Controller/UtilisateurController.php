@@ -153,10 +153,12 @@ class UtilisateurController extends AbstractController
         
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->add('imageFile', FileType::class, [
-            'mapped' => false
+            'mapped' => false,
+            'required' => false,
         ]);
         $form->add('coverFile', FileType::class, [
-            'mapped' => false
+            'mapped' => false,
+            'required' => false,
         ]);
         $form->handleRequest($request);
 
@@ -166,6 +168,7 @@ class UtilisateurController extends AbstractController
 
             /** @var UploadedFile $uploadedFile */
  $uploadedFile = $form['imageFile']->getData();
+ if ($uploadedFile){
  $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
  $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
  $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
@@ -174,10 +177,12 @@ class UtilisateurController extends AbstractController
      $newFilename
  );
  $utilisateur->setImage($newFilename);
+}
 
 //photo de couverture
  /** @var UploadedFile $uploadedFile */
  $uploadedFile = $form['coverFile']->getData();
+ if ($uploadedFile){
  $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
  $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
  $newCovername = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
@@ -186,6 +191,7 @@ class UtilisateurController extends AbstractController
      $newCovername
  );
  $utilisateur->setPhotocover($newCovername);
+}
  
             $this->getDoctrine()->getManager()->flush();
 

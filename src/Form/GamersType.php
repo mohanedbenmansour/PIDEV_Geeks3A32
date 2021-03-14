@@ -6,6 +6,7 @@ use App\Entity\Gamers;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class GamersType extends AbstractType
 {
@@ -14,7 +15,7 @@ class GamersType extends AbstractType
         $builder
             ->add('name')
             ->add('age')
-            ->add('description')
+            ->add('description',TextareaType::class)
         ;
     }
 

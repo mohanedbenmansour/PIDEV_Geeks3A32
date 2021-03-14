@@ -9,9 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/gamers")
+ * @IsGranted("ROLE_ADMIN")
  */
 class GamersController extends AbstractController
 {
@@ -32,9 +35,26 @@ class GamersController extends AbstractController
     {
         $gamer = new Gamers();
         $form = $this->createForm(GamersType::class, $gamer);
+        $form->add('playerFile', FileType::class, [
+            'mapped' => false
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //photo de profil
+
+            /** @var UploadedFile $uploadedFile */
+ $uploadedFile = $form['playerFile']->getData();
+ $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+ $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+ $newPlFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+ $uploadedFile->move(
+     $destination,
+     $newPlFilename
+ );
+ $gamer->setPlayerPhoto($newPlFilename);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($gamer);
             $entityManager->flush();

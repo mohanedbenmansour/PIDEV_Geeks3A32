@@ -22,6 +22,11 @@ class UtilisateurType extends AbstractType
     {
         $builder
             ->add('username')
+            ->add('nom')
+            ->add('prenom')
+            ->add('facebookprofil')
+            ->add('twitchProfil')
+            ->add('youtubeChannel')
             ->add('email',EmailType::class)
             ->add('phoneNumber')
             
