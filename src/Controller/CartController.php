@@ -129,7 +129,7 @@ class CartController extends AbstractController
                 $date=new \DateTime();
                 $order->setCheckoutDate($date->format('Y-m-d H:i:s'));
                 $order->setUserId(1);
-$order->setTotalPrice($total);
+                $order->setTotalPrice($total);
 
                 $entityManager->persist($order);
                 $entityManager->flush();

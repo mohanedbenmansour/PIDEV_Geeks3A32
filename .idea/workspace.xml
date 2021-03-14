@@ -20,15 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="970c4d55-80d3-4452-bb21-fd55b3b41ac0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/css/drift.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/drift.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CartController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/OrderType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/OrderType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.back.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.back.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cart/test.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cart/test.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product/index.front.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/index.front.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,6 +194,8 @@
       <workItem from="1615507801631" duration="1170000" />
       <workItem from="1615509077670" duration="1864000" />
       <workItem from="1615542728278" duration="1767000" />
+      <workItem from="1615558320321" duration="636000" />
+      <workItem from="1615662104748" duration="3544000" />
     </task>
     <servers />
   </component>
