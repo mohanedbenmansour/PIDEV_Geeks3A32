@@ -1,0 +1,54 @@
+{% extends 'base.back.html.twig' %}
+
+{% block title %}New Tournoi{% endblock %}
+
+{% block body %}
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+    <h1> Ajouter un Tournoi </h1>
+    <table  class="table">
+
+        <tr>
+            <td >
+                {{ form_errors(form.Nom ) }}
+                {{ form_label(form.Nom ,"Nom du tournoi") }}
+                {{ form_widget(form.Nom ) }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ form_errors(form.description) }}
+                {{ form_label(form.description,"Description") }}
+                {{ form_widget(form.description) }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ form_errors(form.adresse) }}
+                {{ form_label(form.adresse,"Adresse du tournoi") }}
+                {{ form_widget(form.adresse) }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ form_errors(form.imageFile) }}
+                {{ form_label(form.imageFile,"Image du tournoi") }}
+                {{ form_widget(form.imageFile) }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ form_label(form.date_tournoi ,"date tournoi") }}
+                {{ form_widget(form.date_tournoi )}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ form_label(form.date_publication ,"date tournoi") }}
+                {{ form_widget(form.date_publication )}}
+            </td>
+        </tr>
+    </table>
+    {{ form_end(form) }}
+
+    <a href="{{ path('tournoi_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gamers index{% endblock %}
+
+{% block body %}
+<div class="container text-left">
+    <h1>Liste des gamers</h1>
+    
+    
+    
+    
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>photo</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for gamer in gamers %}
+            <tr>
+                <td>{{ gamer.id }}</td>
+                <td>{{ gamer.name }}</td>
+                <td>{{ gamer.age }}</td>
+                <td><img src="/uploads/{{ gamer.playerphoto }}" alt="{{ gamer.playerphoto }}" width="40" height="40"></td>
+                <td>{{ gamer.description }}</td>
+                <td>
+                    
+                    <a href="{{ path('gamers_show', {'id': gamer.id}) }}" class="btn btn-primary" ">show</a>
+                    
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+   </div> 
+    
+
+    
+{% endblock %}

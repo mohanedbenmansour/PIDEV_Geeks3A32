@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification compte{% endblock %}
+
+{% block body %}
+    <h1>Modifier votre compte</h1>
+    <fieldset>
+        <legend>Modification</legend>
+        {{ form_start(form, {'attr': {'id': 'new_edit_utilisateur'}}) }}
+        {# utilisation de classes bootstrap pour la mise en forme #}
+        <div class="row">
+            <div class="col-lg-12 no-pdd">
+                <label>nickname</label>
+                </br>
+                {{ form_widget(form.username) }}
+                
+            </div>
+            <div class="col-lg-12 no-pdd">
+                <label>First name</label>
+                </br>
+                {{ form_widget(form.prenom) }}
+                
+            </div>
+            <div class="col-lg-12 no-pdd">
+                <label>Last name</label>
+                </br>
+                {{ form_widget(form.nom) }}
+                
+            </div>
+            
+            <div class="col-lg-12 no-pdd">
+                <label>Email</label>
+                </br>
+                {{ form_widget(form.email) }}
+                
+            </div>
+            <div class="col-lg-12 no-pdd">
+                <label>Phone number</label>
+                </br>
+                {{ form_widget(form.phoneNumber) }}
+                
+            </div>
+            <div class="col-lg-12 no-pdd">
+                <label>Password</label>
+                </br>
+                {{ form_widget(form.password) }}
+            </div>
+            <div class="col-lg-12 no-pdd">
+                <label for="verifpass">Confirm your password</label>
+                </br>
+                <input type="password" id="verifpass" required>
+            </div>
+            <div class="col-lg-12 no-pdd">
+                <label>Facebook profil</label>
+                </br>
+                {{ form_widget(form.facebookprofil) }}
+                
+            </div>
+            <div class="col-lg-12 no-pdd">
+                <label>Twitch Channel</label>
+                </br>
+                {{ form_widget(form.twitchProfil) }}
+                
+            </div>
+            <div class="col-lg-12 no-pdd">
+                <label>Youtube channel</label>
+                </br>
+                {{ form_widget(form.youtubeChannel) }}
+                
+            </div>
+            <div class="col-lg-12 no-pdd">
+                <label>profile picture</label>
+                </br>
+                {{ form_widget(form.imageFile) }}
+                
+            </div>
+            <div class="col-lg-12 no-pdd">
+                <label>Cover picture</label>
+                </br>
+                {{ form_widget(form.coverFile) }}
+                
+            </div>
+        </div>
+        <button class="btn btn-success">{{ button_label|default('Mettre à jour') }}</button>
+        {{ form_end(form) }}
+    </fieldset>
+
+    <a class="btn btn-outline-primary" href="{{ path('membre') }}">Page membre</a>
+
+    {{ include('utilisateur/_delete_form.html.twig') }}
+{% endblock %}

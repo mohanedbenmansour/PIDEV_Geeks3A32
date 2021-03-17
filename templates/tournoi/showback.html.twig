@@ -1,0 +1,50 @@
+{% extends 'base.back.html.twig' %}
+
+{% block title %}Tournoi{% endblock %}
+
+{% block main %}
+    <h1>Tournoi</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tournoi.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ tournoi.Nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ tournoi.description }}</td>
+            </tr>
+            <tr>
+                <th>Nombre de Participants</th>
+                <td>{{ tournoi.Nbmax }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ tournoi.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="/uploads/{{ tournoi.image }}" alt="{{ tournoi.image }}" width="100" height="100"></td>
+            </tr>
+            <tr>
+                <th>Date_tournoi</th>
+                <td>{{ tournoi.dateTournoi ? tournoi.dateTournoi|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_publication</th>
+                <td>{{ tournoi.datePublication ? tournoi.datePublication|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('tournoi_indexback') }}">back to list</a>
+
+    <a href="{{ path('tournoi_edit', {'id': tournoi.id}) }}">edit</a>
+
+
+{% endblock %}

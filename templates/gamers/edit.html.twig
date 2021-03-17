@@ -1,0 +1,17 @@
+{% extends 'base.back.html.twig' %}
+
+{% block title %}Edit Gamer{% endblock %}
+
+{% block main %}
+<div class="container text-left">
+    <h1>Edit Gamers</h1>
+
+    {{ include('gamers/_form.html.twig', {'button_label': 'Update'}) }}
+
+    
+    <a href="{{ path('gamers_index') }}" class="btn btn-primary" ">back to list</a>
+    
+
+    {{ include('gamers/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
