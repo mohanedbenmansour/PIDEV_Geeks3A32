@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Event{% endblock %}
+
+{% block body %}
+    <div class="post-project" style="width:800px; margin-left:170px">
+        <h3>Create an event</h3>
+        <div class="post-project-fields">
+
+        {{ include('event/_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

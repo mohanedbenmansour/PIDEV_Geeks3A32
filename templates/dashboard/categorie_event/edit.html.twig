@@ -1,0 +1,13 @@
+{% extends 'base.back.html.twig' %}
+
+{% block title %}Edit Category{% endblock %}
+
+{% block main %}
+    <div class="post-project" style="width:500px; margin-left:400px;margin-top: 50px">
+        <h3>Edit category</h3>
+        <div class="post-project-fields">
+            {{ include('dashboard/categorie_event/_form.html.twig', {'button_label': 'Update'}) }}
+            <a href="{{ path('back_categoriesevent') }}">Cancel</a>
+        </div>
+    </div>
+{% endblock %}

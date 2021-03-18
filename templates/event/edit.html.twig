@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Event{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" type="text/css" href="{{asset('css/style1.css')}}" />
+
+    <div class="post-project" style="width:800px; margin-left:170px">
+        <h3>Create an event</h3>
+        <div class="post-project-fields">
+            {{ include('event/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+    </div>
+{% endblock %}

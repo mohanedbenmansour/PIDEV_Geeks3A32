@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ event.name }}{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" type="text/css" href="{{asset('css/style1.css')}}" />
+
+    <div class="container" >
+        <div class="row">
+
+            <main class="col-xl-8 m-auto col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <div class="ui-block">
+                    <a href="{{ path('back_events') }}" style="padding: 20px 15px 20px;">
+                        <img src="{{asset('images/back.png')}}" alt="" >
+                    </a>
+                    <article id="post-118" class="hentry blog-post single-post-olympus single-post-v1 post-118 post type-post status-publish format-standard has-post-thumbnail category-olympus-news">
+
+
+
+                        <div class="post-category-list">
+                            <a href="category/olympus-news/index.html" class=" post-category bg-primary" style="" title="All posts from Olympus News">{{ event.category.getName() }}</a>
+                        </div>
+                        <h1 class="post-title entry-title">{{ event.name }}</h1>
+                        <div class=""author-date">ID:{{ event.id }}</div>
+                <div class="author-date">
+                    <div class="author-thumb">
+                        <img alt='' src=''  class='avatar avatar-30 photo' height='30' width='30' loading='lazy' />
+                    </div>
+                    by <a class="h6 post__author-name fn vcard font-weight-bold" href="">{{ event.userId }}</a> - <span class="post__date entry-date published updated"><time class="entry-date published updated">{{ event.datePub ? event.datePub|date('Y-m-d H:i:s') : '' }}</time></span>
+                </div>
+
+                <div class="post-content-wrap">
+
+
+                    <div class="post-content">
+                        <p><img loading="lazy" class="alignnone wp-image-57 size-full" src="/uploads/{{ event.img }}" alt="{{ event.img }}" width="1200" height="800"  sizes="(max-width: 1200px) 100vw, 1200px" /></p>
+                        <p style="text-align: center;">{{ event.description |raw}}</p>
+                        <p>{{ event.url }}</p>
+                        <ul class="filter-icons reaction-toggle-parent reactions-count-used-118" data-post="118" data-nonce="8c6e8b7414">
+                            <li>
+                                <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                    <img src="{{asset('images/icon10.png')}}" alt="icon">
+                                    <span>Date début : {{ event.dateDebut ? event.dateDebut|date('Y-m-d H:i:s') : '' }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                    <img src="{{asset('images/icon10.png')}}" alt="icon">
+                                    <span>Date fin : {{ event.dateFin ? event.dateFin|date('Y-m-d H:i:s') : '' }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                    <img src="{{asset('images/icon9.png')}}" alt="icon">
+                                    <span>Lieu : {{ event.lieu}}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                    <img src="{{asset('images/price-tag.png')}}" alt="icon">
+                                    {% if (event.prix == 0 ) %}
+                                        <span>Gratuit</span>
+                                    {% else %}
+                                        <span>Prix : {{ event.prix }}DT</span>
+                                    {% endif %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                    <img src="{{asset('images/participants.png')}}" alt="icon">
+                                    <span>Nombre max participants : {{ event.nbParticipants}}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                    <img src="{{asset('images/participants.png')}}" alt="icon">
+                                    <span>Participants : {% for p in participants %}
+                                        user with id :{{ p.userId }}
+                                        {% endfor %}
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        {% if exist %}
+                            <ul class="bk-links">
+                                <li><a class="bid_now">Participe deja</a></li>
+                            </ul>
+                        {% else %}
+                            {% if complet %}
+                                <ul class="bk-links">
+                                    <li><a class="bid_now">Complet</a></li>
+                                </ul>
+                            {% else %}
+                                <ul class="bk-links">
+                                    <li><a href="{{ path('add_participation', {'id': event.id})}}" title="" onclick="return confirm('Partipation done')" class="bid_now">Participer</a></li>
+                                </ul>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                </article>>
+        </div>
+        </main>
+    </div>
+    </div>
+{% endblock %}
