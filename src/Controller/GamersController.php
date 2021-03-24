@@ -12,14 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-/**
- * @Route("/gamers")
- * @IsGranted("ROLE_ADMIN")
- */
+
 class GamersController extends AbstractController
 {
     /**
-     * @Route("/", name="gamers_index", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/gamers", name="gamers_index", methods={"GET"})
      */
     public function index(GamersRepository $gamersRepository): Response
     {
@@ -38,13 +36,24 @@ class GamersController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="gamers_new", methods={"GET","POST"})
+     * @Route("/GamersProfiles/{id}", name="gamers_list_show", methods={"GET"})
+     */
+    public function showGamerProfil(Gamers $gamer): Response
+    {
+        return $this->render('gamers/showGamerProfil.html.twig', [
+            'gamer' => $gamer,
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/gamers/new", name="gamers_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
         $gamer = new Gamers();
         $form = $this->createForm(GamersType::class, $gamer);
-        $form->add('playerFile', FileType::class, [
+        $form->add('playerPhoto', FileType::class, [
             'mapped' => false
         ]);
         $form->handleRequest($request);
@@ -54,7 +63,7 @@ class GamersController extends AbstractController
             //photo de profil
 
             /** @var UploadedFile $uploadedFile */
- $uploadedFile = $form['playerFile']->getData();
+ $uploadedFile = $form['playerPhoto']->getData();
  $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
  $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
  $newPlFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
@@ -78,7 +87,7 @@ class GamersController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="gamers_show", methods={"GET"})
+     * @Route("/gamers/{id}", name="gamers_show", methods={"GET"})
      */
     public function show(Gamers $gamer): Response
     {
@@ -88,14 +97,31 @@ class GamersController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="gamers_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/gamers/{id}/edit", name="gamers_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Gamers $gamer): Response
     {
         $form = $this->createForm(GamersType::class, $gamer);
+        $form->add('playerPhoto', FileType::class, [
+            'mapped' => false
+        ]);
         $form->handleRequest($request);
 
+        
+
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $uploadedFile = $form['playerPhoto']->getData();
+ $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+ $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+ $newPlFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+ $uploadedFile->move(
+     $destination,
+     $newPlFilename
+ );
+ $gamer->setPlayerPhoto($newPlFilename);
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('gamers_index');
@@ -108,7 +134,8 @@ class GamersController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="gamers_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/gamers/{id}", name="gamers_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Gamers $gamer): Response
     {

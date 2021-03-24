@@ -16,6 +16,10 @@ class GamersType extends AbstractType
             ->add('name')
             ->add('age')
             ->add('description',TextareaType::class)
+            ->add('gamerTeam')
+            ->add('gamerTwitch')
+            ->add('gamerFacebook')
+
         ;
     }
 

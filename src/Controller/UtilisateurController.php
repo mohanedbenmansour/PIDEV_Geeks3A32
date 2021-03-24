@@ -20,21 +20,19 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
-/**
- * @Route("/utilisateur")
- */
+
 class UtilisateurController extends AbstractController
 {
-   /* private $emailVerifier;
+    private $emailVerifier;
 
     public function __construct(EmailVerifier $emailVerifier)
     {
         $this->emailVerifier = $emailVerifier;
     }
-    */
+
     
     /**
-     * @Route("/", name="utilisateur_index", methods={"GET"})
+     * @Route("/utilisateur", name="utilisateur_index", methods={"GET"})
      */
     public function index(UtilisateurRepository $utilisateurRepository, Session $session): Response
     {
@@ -57,7 +55,7 @@ class UtilisateurController extends AbstractController
 
     
     /**
-     * @Route("/new", name="utilisateur_new", methods={"GET","POST"})
+     * @Route("/Register", name="utilisateur_new", methods={"GET","POST"})
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, Session $session): Response
     {
@@ -85,14 +83,14 @@ class UtilisateurController extends AbstractController
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-        /*    $this->emailVerifier->sendEmailConfirmation('app_verify_email', $utilisateur,
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $utilisateur,
                 (new TemplatedEmail())
-                    ->from(new Address('geek.admin@esprit.tn', 'geek bot'))
+                    ->from(new Address('esprit.geeks@hotmail.com', 'geek bot'))
                     ->to($utilisateur->getEmail())
                     ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('utilisateur/confirmation_email.html.twig')
             );
-            */
+
 
             return $this->redirectToRoute('utilisateur_index');
         }
@@ -106,7 +104,7 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/verify/email", name="app_verify_email")
      */
-    /*
+
     public function verifyUserEmail(Request $request): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -125,10 +123,10 @@ class UtilisateurController extends AbstractController
 
         return $this->redirectToRoute('utilisateur_index');
     }
-    */
+
 
     /**
-     * @Route("/{id}", name="utilisateur_show", methods={"GET"})
+     * @Route("/utilisateur/{id}", name="utilisateur_show", methods={"GET"})
      */
     public function show(Utilisateur $utilisateur): Response
     {
@@ -139,7 +137,7 @@ class UtilisateurController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="utilisateur_edit", methods={"GET","POST"})
+     * @Route("/utilisateur/{id}/edit", name="utilisateur_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Utilisateur $utilisateur, UserPasswordEncoderInterface $passwordEncoder, Session $session, $id): Response
     {
@@ -205,7 +203,7 @@ class UtilisateurController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="utilisateur_delete", methods={"DELETE"})
+     * @Route("/utilisateur/{id}", name="utilisateur_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Utilisateur $utilisateur, Session $session, $id): Response
     {

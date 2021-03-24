@@ -37,6 +37,21 @@ class Gamers
      */
     private $playerPhoto;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $gamerTwitch;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $gamerFacebook;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $gamerTeam;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +101,42 @@ class Gamers
     public function setPlayerPhoto(?string $playerPhoto): self
     {
         $this->playerPhoto = $playerPhoto;
+
+        return $this;
+    }
+
+    public function getGamerTwitch(): ?string
+    {
+        return $this->gamerTwitch;
+    }
+
+    public function setGamerTwitch(string $gamerTwitch): self
+    {
+        $this->gamerTwitch = $gamerTwitch;
+
+        return $this;
+    }
+
+    public function getGamerFacebook(): ?string
+    {
+        return $this->gamerFacebook;
+    }
+
+    public function setGamerFacebook(string $gamerFacebook): self
+    {
+        $this->gamerFacebook = $gamerFacebook;
+
+        return $this;
+    }
+
+    public function getGamerTeam(): ?string
+    {
+        return $this->gamerTeam;
+    }
+
+    public function setGamerTeam(?string $gamerTeam): self
+    {
+        $this->gamerTeam = $gamerTeam;
 
         return $this;
     }
