@@ -639,13 +639,13 @@
                 <div class="col-lg-3 pd-right-none no-pd">
                   <div class="right-sidebar">
                     <div class="widget widget-about">
-                      <img src="images/wd-logo.png" alt="" />
-                      <h3>Track Time on Workwise</h3>
-                      <span>Pay only for the Hours worked</span>
-                      <div class="sign_link">
-                        <h3><a href="sign-in.html" title="">Sign up</a></h3>
-                        <a href="#" title="">Learn More</a>
-                      </div>
+                      {% for publicity in publicities %}
+                        {% if publicity.etat %}
+
+                          <img src="/uploads/{{publicity.image }}" alt="" />
+                          <h3>{{publicity.content }}</h3>
+                        {% endif %}
+                      {% endfor %}
                     </div>
                     <div class="widget widget-jobs">
                       <div class="sd-title">
