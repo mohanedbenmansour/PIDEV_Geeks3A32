@@ -3,8 +3,10 @@
 {% block title %}Publicite index{% endblock %}
 
 {% block main %}
-    <h1>Publicite index</h1>
 
+<div class="container">
+    <h1>Publicite index</h1>
+    <a href="{{ path('publicite_new') }}"  class="btn btn-success">Create new</a>
     <table class="table">
         <thead>
             <tr>
@@ -25,10 +27,16 @@
                 <td>{{ publicite.dateDebut ? publicite.dateDebut|date('Y-m-d') : '' }}</td>
                 <td>{{ publicite.dateFin ? publicite.dateDebut|date('Y-m-d') : '' }}</td>
                 <td><img src="/uploads/{{ publicite.image }}" alt="{{ publicite.image }}" width="150" height="150"></td>
-                <td>{{ publicite.etat ? 'active' : 'inactive' }}</td>
+                {% if publicite.etat %}
+                    <td><button class="btn btn-outline-success disabled">{{ publicite.etat ? 'active' : 'inactive' }}</button></td>
+                {% endif %}
+                {% if publicite.etat == false %}
+                    <td><button class="btn btn-outline-danger disabled">{{ publicite.etat ? 'active' : 'inactive' }}</button></td>
+                {% endif %}
+
                 <td>
-                    <a href="{{ path('publicite_show', {'id': publicite.id}) }}">show</a>
-                    <a href="{{ path('publicite_edit', {'id': publicite.id}) }}">edit</a>
+                    <a class="btn btn btn-warning" href="{{ path('publicite_show', {'id': publicite.id}) }}">show</a>
+                    <a class="btn btn btn-danger" href="{{ path('publicite_edit', {'id': publicite.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +47,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('publicite_new') }}">Create new</a>
+
+    </div>
 {% endblock %}

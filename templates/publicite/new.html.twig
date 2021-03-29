@@ -3,9 +3,24 @@
 {% block title %}New Publicite{% endblock %}
 
 {% block main %}
-    <h1>Create new Publicite</h1>
+    <style>
+        li{
+            color: red;
+            font-size: 15px;
+            width: 10%;
+        }
+    </style>
+    <style>
+        .container {
+            width:50%;
+            min-width: 300px;
+        }
 
-    {{ include('publicite/_form.html.twig') }}
+    </style>
+    <div class="container">
+        <h1>Create new Publicite</h1>
+        {{ include('publicite/_form.html.twig') }}
+        <a class="btn btn-success" style="width: 90%" href="{{ path('publicite_index') }}">Show ADS</a>
+    </div>
 
-    <a href="{{ path('publicite_index') }}">back to list</a>
 {% endblock %}

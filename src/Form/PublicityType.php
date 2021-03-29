@@ -16,11 +16,20 @@ class PublicityType extends AbstractType
     {
         $builder
             ->add('content',TextType::class,[
-                'label'=>"Content",])
+                'label'=>"Content",
+                'attr'=>[
+                    "placeholder"=>"Content",
+                    'class'=>"form-control"
+                ]])
             ->add('date_debut',DateType::class,[
-                'label'=>"Period Start Date",])
+                'label'=>"Period Start Date",
+                'attr'=>[
+                    "placeholder"=>"Start Date",
+                ]])
             ->add('date_fin',DateType::class,[
-                'label'=>"Period End Date",])
+                'label'=>"Period End Date",'attr'=>[
+                    "placeholder"=>"End Date",
+                ]])
             ->add('imagefilename',FileType::class,[
                 'label'=>"Image",
                 'mapped' => false,
