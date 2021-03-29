@@ -55,7 +55,7 @@ class UtilisateurController extends AbstractController
 
     
     /**
-     * @Route("/Register", name="utilisateur_new", methods={"GET","POST"})
+     * @Route("/signUp", name="utilisateur_new", methods={"GET","POST"})
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, Session $session): Response
     {

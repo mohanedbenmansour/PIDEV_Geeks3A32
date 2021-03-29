@@ -3,47 +3,53 @@
 {% block title %}Gamers index{% endblock %}
 
 {% block body %}
-<div class="container text-left">
-    <div class="top-profiles">
-                        <div class="pf-hd">
-                          <h3>Top Gamers</h3>
-                          <i class="la la-ellipsis-v"></i>
-                        </div>   
+    <section class="companies-info">
+    <div class="container">
+    <div class="company-title">
+        <h3>Gamers profiles</h3>
+    </div>
+    <div class="companies-list">
+    <div class="row">
 
     <table class="table">
         
         <tbody>
         {% for gamer in gamers %}
             <tr>
-                <div class="profiles-slider">
-                          <div class="user-profy">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="company_profile_info">
+                        <div class="company-up-info">
                             <img src="/uploads/{{ gamer.playerphoto }}" alt="{{ gamer.playerphoto }}" width="60" height="60">
                             <h3>{{ gamer.name }}</h3>
-                            <span>{{ gamer.description }}</span>
+                            <h4>{{ gamer.description }}</h4>
                             <ul>
-                              <li>
-                                <a href="#" title="" class="followw">Follow</a>
-                              </li>
-                              <li>
-                                <a href="#" title="" class="envlp"
-                                  ><img src="images/envelop.png" alt=""
-                                /></a>
-                              </li>
-                              <li>
-                                <a href="#" title="" class="hire">hire</a>
-                              </li>
+                                <li><a href="#" title="" class="follow">Follow</a></li>
+                                <li><a href="#" title="" class="message-us"><i class="fa fa-envelope"></i></a></li>
                             </ul>
-                            <a href="{{ path('gamers_list_show', {'id': gamer.id}) }}" title="">View Profile</a>
-                          </div>
+                        </div>
+                        <a href="{{ path('gamers_list_show', {'id': gamer.id}) }}" title="" class="view-more-pro">View Profile</a>
+                    </div>
+                </div>
             </tr>
-            </div>
+
         {% else %}
             <tr>
                 <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
-    </table>    
+    </table>
+    </div>
+    </div>
+        <div class="process-comm">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+    </div>
+    </section>
 
     
 {% endblock %}
