@@ -11,97 +11,245 @@
             <main class="col-xl-8 m-auto col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                 <div class="ui-block">
-                    <a href="{{ path('back_events') }}" style="padding: 20px 15px 20px;">
+                    <a href="{{ path('event_index') }}" style="padding: 20px 15px 20px;">
                         <img src="{{asset('images/back.png')}}" alt="" >
                     </a>
                     <article id="post-118" class="hentry blog-post single-post-olympus single-post-v1 post-118 post type-post status-publish format-standard has-post-thumbnail category-olympus-news">
-
-
-
                         <div class="post-category-list">
-                            <a href="category/olympus-news/index.html" class=" post-category bg-primary" style="" title="All posts from Olympus News">{{ event.category.getName() }}</a>
+                            <a class=" post-category bg-primary">{{ event.category.getName() }}</a>
                         </div>
                         <h1 class="post-title entry-title">{{ event.name }}</h1>
-                        <div class=""author-date">ID:{{ event.id }}</div>
-                <div class="author-date">
-                    <div class="author-thumb">
-                        <img alt='' src=''  class='avatar avatar-30 photo' height='30' width='30' loading='lazy' />
-                    </div>
-                    by <a class="h6 post__author-name fn vcard font-weight-bold" href="">{{ event.userId }}</a> - <span class="post__date entry-date published updated"><time class="entry-date published updated">{{ event.datePub ? event.datePub|date('Y-m-d H:i:s') : '' }}</time></span>
-                </div>
+                        <div class="author-date">ID:{{ event.id }}</div>
+                        <div class="author-date">
+                            <div class="author-thumb">
+                                <img alt="{{ event.user.image }}" src="/uploads/{{ event.user.image }}"  class='avatar avatar-30 photo' height='30' width='30' loading='lazy' />
+                            </div>
+                            by <a class="h6 post__author-name fn vcard font-weight-bold" href="">{{ event.user.username }}</a> - <span class="post__date entry-date published updated"><time class="entry-date published updated">{{ event.datePub ? event.datePub|date('Y-m-d H:i:s') : '' }}</time></span>
+                        </div>
 
-                <div class="post-content-wrap">
-
-
-                    <div class="post-content">
-                        <p><img loading="lazy" class="alignnone wp-image-57 size-full" src="/uploads/{{ event.img }}" alt="{{ event.img }}" width="1200" height="800"  sizes="(max-width: 1200px) 100vw, 1200px" /></p>
-                        <p style="text-align: center;">{{ event.description |raw}}</p>
-                        <p>{{ event.url }}</p>
-                        <ul class="filter-icons reaction-toggle-parent reactions-count-used-118" data-post="118" data-nonce="8c6e8b7414">
-                            <li>
-                                <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
-                                    <img src="{{asset('images/icon10.png')}}" alt="icon">
-                                    <span>Date début : {{ event.dateDebut ? event.dateDebut|date('Y-m-d H:i:s') : '' }}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
-                                    <img src="{{asset('images/icon10.png')}}" alt="icon">
-                                    <span>Date fin : {{ event.dateFin ? event.dateFin|date('Y-m-d H:i:s') : '' }}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
-                                    <img src="{{asset('images/icon9.png')}}" alt="icon">
-                                    <span>Lieu : {{ event.lieu}}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
-                                    <img src="{{asset('images/price-tag.png')}}" alt="icon">
-                                    {% if (event.prix == 0 ) %}
-                                        <span>Gratuit</span>
+                        <div class="post-content-wrap">
+                            <div class="post-content">
+                                <p><img loading="lazy" class="alignnone wp-image-57 size-full" src="/uploads/{{ event.img }}" alt="{{ event.img }}" width="1200" height="800"  sizes="(max-width: 1200px) 100vw, 1200px" /></p>
+                                <p style="text-align: center;">{{ event.description |raw}}</p>
+                                <p>{{ event.url }}</p>
+                                <ul class="filter-icons reaction-toggle-parent reactions-count-used-118" data-post="118" data-nonce="8c6e8b7414">
+                                    <li>
+                                        <div data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                            <img src="{{asset('images/icon10.png')}}" alt="icon">
+                                            <span>Date début : {{ event.dateDebut ? event.dateDebut|date('Y-m-d H:i:s') : '' }}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                            <img src="{{asset('images/icon10.png')}}" alt="icon">
+                                            <span>Date fin : {{ event.dateFin ? event.dateFin|date('Y-m-d H:i:s') : '' }}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                            <img src="{{asset('images/icon9.png')}}" alt="icon">
+                                            <span>Lieu : {{ event.lieu}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                            <img src="{{asset('images/price-tag.png')}}" alt="icon">
+                                            {% if (event.prix == 0 ) %}
+                                                <span>Gratuit</span>
+                                            {% else %}
+                                                <span>Prix : {{ event.prix }}DT</span>
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                            <img src="{{asset('images/participants.png')}}" alt="icon">
+                                            <span>Nombre max participants : {{ event.nbParticipants}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                            <img src="{{asset('images/participants.png')}}" alt="icon">
+                                            <span>Participants : {% for p in participants %}
+                                                    <div class="author-thumb">
+                                                    <img class="avatar avatar-30 photo" height='30' width='30' src="/uploads/{{ p.user.image }}" alt="icon">
+                                                    </div>
+                                                    {% endfor %}
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                {% if exist %}
+                                    {% if complet %}
+                                        <ul class="bk-links">
+                                            <li><img src="{{asset('images/complet.png')}}" width="80px"></li>
+                                            <li><a class="bid_now" style="color:#000">Participe deja</a></li>
+                                        </ul>
                                     {% else %}
-                                        <span>Prix : {{ event.prix }}DT</span>
+                                        <ul class="bk-links">
+                                            <li><a class="bid_now" style="color:#000">Participe deja</a></li>
+                                        </ul>
                                     {% endif %}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
-                                    <img src="{{asset('images/participants.png')}}" alt="icon">
-                                    <span>Nombre max participants : {{ event.nbParticipants}}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
-                                    <img src="{{asset('images/participants.png')}}" alt="icon">
-                                    <span>Participants : {% for p in participants %}
-                                        user with id :{{ p.userId }}
-                                        {% endfor %}
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        {% if exist %}
-                            <ul class="bk-links">
-                                <li><a class="bid_now">Participe deja</a></li>
-                            </ul>
-                        {% else %}
-                            {% if complet %}
-                                <ul class="bk-links">
-                                    <li><a class="bid_now">Complet</a></li>
-                                </ul>
-                            {% else %}
-                                <ul class="bk-links">
-                                    <li><a href="{{ path('add_participation', {'id': event.id})}}" title="" onclick="return confirm('Partipation done')" class="bid_now">Participer</a></li>
-                                </ul>
-                            {% endif %}
-                        {% endif %}
+                                {% else %}
+                                    {% if complet %}
+                                        <ul class="bk-links">
+                                            <li><img src="{{asset('images/complet.png')}}" width="80px"></li>
+                                            <li><a class="bid_now">Complet</a></li>
+                                        </ul>
+                                    {% else %}
+                                        <ul class="bk-links">
+                                            <li><a href="{{ path('add_participation', {'id': event.id})}}" title="" onclick="return confirm('Partipation done')" class="bid_now">Participer</a></li>
+                                        </ul>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                {% for c in comments %}
+                <ul id="comments" class="comments-list">
+
+                    <li class="comment even thread-even depth-1 comment-item reply-comment"  id="div-comment-98">
+                        <article class="comment odd alt thread-odd thread-alt depth-1 comment-entry comment comments__article" id="comment-98" style="outline: none;">
+                            <div class="post__author author vcard inline-items">
+                                <img alt="" src="/uploads/{{ c.user.image }}" class="avatar avatar-52 photo" height="52" width="52" loading="lazy">
+                                <div class="author-date">
+                                    <a class="h6 post__author-name fn" href="" itemprop="author"> {{ c.user.username }} </a>
+                                    <div class="post__date">
+                                        <time class="comment-meta-item" itemprop="datePublished">{{ c.date ? c.date|date('Y-m-d H:i:s') : '' }}</time>
+                                    </div>
+                                </div>
+                                {% if app.user.id == c.user.id %}
+                                    <div class="ed-opts">
+                                        <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+                                        <ul class="ed-options">
+                                            <li><a href="{{ path('event_delete', {'id': c.id}) }}" title="">Edit Comment</a></li>
+                                            <li>
+                                                <form method="post" action="{{ path('comment_delete', {'id': c.event.id , 'idc' : c.id }) }}" onsubmit="return confirm('Are you sure you want to delete this comment?');">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ c.id) }}">
+                                                    <button>Delete Comment</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <p>{{ c.contenu | raw }}</p>
+                        </article>
+                    </li>
+                </ul>
+                {% endfor %}
+
+                <div class="ui-block">
+                    <div id="respond" class="comment-respond">
+                        <div class="more-comments">Leave a Comment</div>
+                        <div class="comment-form comment-form--without-author">
+                            <div class="row">
+                                {{ form_start(form) }}
+                                <div class="col-xl-12 col-lg-12 col-md-12">
+                                    <div class="form-group label-floating is-empty">
+                                        {{ form(form) }}
+                                    </div>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
                     </div>
                 </div>
-                </article>>
+
+
+                <div class="mt60">
+
+                    <div class="related-posts">
+                        <div class="crumina-module crumina-heading with-title-decoration">
+                            <h5 class="heading-title">Related Articles</h5>
+                        </div>
+                        <div class="row">
+                            <div class="">
+                                {% for event in suggestedEvents %}
+                                <div class="col-xl-6 col-lg-6 col-md-6" >
+                                <div class="ui-block">
+                                    <div class="post-thumb" style"margin-top: 5px">
+                                    <center><img src="/uploads/{{ event.img }}" alt="image event"style="display: block;
+                                                                            margin-left: auto;
+                                                                            margin-right: auto;
+                                                                            width: auto;
+                                                                            height: 243px;
+                                                                            "></center>
+
+                                <div class="post-content" >
+                                    <div class="post_topbar" style="padding: 15px 15px 10px; background-color: #fff;">
+                                        <div class="usy-dt">
+                                            <img class="img-event" src="/uploads/{{ event.user.image }}" alt="{{ event.user.image }}"  width= 50px alt="">
+                                            <div class="usy-name">
+                                                <h3>{{ event.name }}</h3>
+                                                <span><img src="../images/clock.png" alt=""> {{ event.datePub ? event.datePub|date('Y-m-d H:i:s') : '' }} </span>
+                                            </div>
+                                        </div>
+                                        {% if app.user.id == event.user.id %}
+                                            <div class="ed-opts">
+                                                <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+                                                <ul class="ed-options">
+                                                    <li><a href="{{ path('event_edit', {'id': event.id}) }}" title="">Edit Event</a></li>
+                                                    <li><form method="post" action="{{ path('event_delete', {'id': event.id}) }}" onsubmit="return confirm('Are you sure you want to delete this event?');">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
+                                                            <button>Delete Event</button>
+                                                        </form></li>
+                                                    <li><a href="#" title="">Report Event</a></li>
+                                                </ul>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="epi-sec" style="padding: 0px 15px 0px; background-color: #fff;">
+                                        <ul class="descp" style="margin:0px 0px">
+                                            <li><img src="../images/icon9.png" alt=""><span>{{ event.lieu }}</span></li>
+                                            <li><img src="../images/icon10.png" alt=""><span>{{ event.dateDebut ? event.dateDebut|date('Y-m-d H:i:s') : '' }}</span></li>
+                                            <li><img src="../images/icon10.png" alt=""><span>{{ event.dateFin ? event.dateFin|date('Y-m-d H:i:s') : '' }}</span></li>
+
+                                        </ul>
+
+                                    </div>
+                                    <div class="job_descp" style="padding: 0px 20px 0px; background-color: #fff;">
+                                        {#<h3>Simple Classified Site</h3>#}
+
+                                        <div style="max-width: 420px; margin: 38px auto;">
+                                            <p style="overflow: hidden !important; display: -webkit-box !important; -webkit-line-clamp: 3 !important; -webkit-box-orient: vertical !important;">
+                                                {{ event.description |raw}}<a href="#" title=""></a></p>
+                                        </div>
+                                        <ul class="job-dt" style="margin-bottom:5px">
+                                            {% if (event.prix == 0 ) %}
+                                                <li><span>Gratuit</span></li>
+                                            {% else %}
+                                                <li><span>{{ event.prix }}DT</span></li>
+                                            {% endif %}
+                                            <li class="bk-links"><a style="font-size:16px; padding:0px 10px" href="{{ path('event_show', {'id': event.id}) }}" title="" class="bid_now">Afficher</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="job-status-bar" style="padding: 0px 30px 10px; background-color: #fff;">
+                                        <ul class="like-com">
+                                            <li>
+                                                <a href="#" class="active"><i class="fas fa-heart"></i> Like</a>
+                                                <img src="../images/liked-img.png" alt="">
+                                                <span>25</span>
+                                            </li>
+                                            <li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comments 15</a></li>
+                                        </ul>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </main>
         </div>
-        </main>
-    </div>
     </div>
 {% endblock %}

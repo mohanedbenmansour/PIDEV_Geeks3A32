@@ -30,7 +30,7 @@ class UtilisateurController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
-    
+
     /**
      * @Route("/utilisateur", name="utilisateur_index", methods={"GET"})
      */
@@ -44,7 +44,7 @@ class UtilisateurController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        else if(in_array('ROLE_ADMIN', $utilisateur->getRoles())){
+        else if(in_array('ROLE_USER', $utilisateur->getRoles())){
             return $this->render('utilisateur/index.html.twig', [
                 'utilisateurs' => $utilisateurRepository->findAll(),
             ]);
@@ -53,7 +53,29 @@ class UtilisateurController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
-    
+    /**
+     * @Route("/userDashboard", name="dashboard_user_index", methods={"GET"})
+     */
+    public function DashboardIndex(UtilisateurRepository $utilisateurRepository, Session $session): Response
+    {
+        //besoin de droits admin
+        $utilisateur = $this->getUser();
+        if(!$utilisateur)
+        {
+            $session->set("message", "Merci de vous connecter");
+            return $this->redirectToRoute('app_login');
+        }
+
+        else if(in_array('ROLE_ADMIN', $utilisateur->getRoles())){
+            return $this->render('utilisateur/dashboardIndex.html.twig', [
+                'utilisateurs' => $utilisateurRepository->findAll(),
+            ]);
+        }
+
+        return $this->redirectToRoute('home');
+    }
+
+
     /**
      * @Route("/signUp", name="utilisateur_new", methods={"GET","POST"})
      */
@@ -62,6 +84,7 @@ class UtilisateurController extends AbstractController
 
         //test de sécurité, un utilisateur connecté ne peut pas s'inscrire
         $utilisateur = $this->getUser();
+        //(dd($this->getUser()));
         if($utilisateur)
         {
             $session->set("message", "Vous ne pouvez pas créer un compte lorsque vous êtes connecté");
@@ -75,10 +98,11 @@ class UtilisateurController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $utilisateur->setPassword($passwordEncoder->encodePassword($utilisateur, $utilisateur->getPassword()));
-            
+
             /* uniquement pour créer un admin
             $role = ['ROLE_ADMIN'];
             $utilisateur->setRoles($role); */
+            $session->set("user",$utilisateur);
             $entityManager->persist($utilisateur);
             $entityManager->flush();
 
@@ -137,6 +161,17 @@ class UtilisateurController extends AbstractController
     }
 
     /**
+     * @Route("/userDashboard/{id}", name="dashboard_user_show", methods={"GET"})
+     */
+    public function AdminShow(Utilisateur $utilisateur): Response
+    {
+        //accès géré dans le security.yaml
+        return $this->render('utilisateur/AdminShow.html.twig', [
+            'utilisateur' => $utilisateur,
+        ]);
+    }
+
+    /**
      * @Route("/utilisateur/{id}/edit", name="utilisateur_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Utilisateur $utilisateur, UserPasswordEncoderInterface $passwordEncoder, Session $session, $id): Response
@@ -148,7 +183,7 @@ class UtilisateurController extends AbstractController
             $session->set("message", "Vous ne pouvez pas modifier cet utilisateur");
             return $this->redirectToRoute('membre');
         }
-        
+
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->add('imageFile', FileType::class, [
             'mapped' => false,
@@ -165,32 +200,32 @@ class UtilisateurController extends AbstractController
 //photo de profil
 
             /** @var UploadedFile $uploadedFile */
- $uploadedFile = $form['imageFile']->getData();
- if ($uploadedFile){
- $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
- $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
- $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
- $uploadedFile->move(
-     $destination,
-     $newFilename
- );
- $utilisateur->setImage($newFilename);
-}
+            $uploadedFile = $form['imageFile']->getData();
+            if ($uploadedFile){
+                $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+                $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+                $uploadedFile->move(
+                    $destination,
+                    $newFilename
+                );
+                $utilisateur->setImage($newFilename);
+            }
 
 //photo de couverture
- /** @var UploadedFile $uploadedFile */
- $uploadedFile = $form['coverFile']->getData();
- if ($uploadedFile){
- $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
- $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
- $newCovername = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
- $uploadedFile->move(
-     $destination,
-     $newCovername
- );
- $utilisateur->setPhotocover($newCovername);
-}
- 
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $form['coverFile']->getData();
+            if ($uploadedFile){
+                $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+                $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $newCovername = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+                $uploadedFile->move(
+                    $destination,
+                    $newCovername
+                );
+                $utilisateur->setPhotocover($newCovername);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('utilisateur_index');

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/", name="app_login")
      */
     public function login(AuthenticationUtils $authenticationUtils, Session $session): Response
     {
@@ -44,6 +44,6 @@ class SecurityController extends AbstractController
     public function logout()
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
-        return $this->redirectToRoute('homepage');
+        return $this->redirectToRoute('login');
     }
 }

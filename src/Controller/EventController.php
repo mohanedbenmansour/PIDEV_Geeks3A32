@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\CommentEvent;
 use App\Entity\Event;
 use App\Entity\Participation;
+use App\Form\CommentEventType;
 use App\Form\EventType;
 use App\Repository\CategorieEventRepository;
+use App\Repository\CommentEventRepository;
 use App\Repository\EventRepository;
 
 use Knp\Component\Pager\PaginatorInterface;
@@ -19,7 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class EventController extends AbstractController
 {
-    private static $uid = 1;
+    private static $uid = 4;
     /**
      * @Route("/", name="event_index", methods={"GET"})
      */
@@ -39,10 +42,27 @@ class EventController extends AbstractController
         return $this->render('event/index.html.twig', [
             'events' => $events,
             'categories' => $categorieEventRepository->findAll(),
-            'uid' => self::$uid,
         ]);
     }
-    //$eventRepository->findAll()
+
+    /**
+     * @Route("/event/{id}/deletecom/{idc}", name="comment_delete", methods={"DELETE"})
+     */
+    public function Commentdelete(Request $request, CommentEvent $comment, EventRepository $eventRepository,$id
+    ): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+
+            $event=$eventRepository->find($id);
+            $event->removeComment($comment);
+
+            $entityManager = $comment->getDoctrine()->getManager();
+            $entityManager->remove($comment);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('event_show');
+    }
     /**
      * @Route("/{id}/addparticipation", name="add_participation", methods={"GET"})
      */
@@ -52,14 +72,14 @@ class EventController extends AbstractController
         $event=$eventRepository->find($id);
         $nbr=0;
         foreach ($event->getParticipations() as $p){
-            if($p->getUserId()==self::$uid){
+            if($p->getUser()->getId()==self::$uid){
                 $nbr++;
             }
         }
         if($nbr < $event->getNbParticipants()){
             $participation = new Participation();
 
-            $participation->setUserId(self::$uid);
+            $participation->setUser($this->getUser());
             $participation->setDate(new \DateTime());
             $event->addParticipation($participation);
 
@@ -82,7 +102,7 @@ class EventController extends AbstractController
         $form->handleRequest($request);
 
         $event->setDatePub(new \DateTime());
-        $event->setUserId(1);
+        $event->setUser($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -111,15 +131,15 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="event_show", methods={"GET"})
+     * @Route("/{id}", name="event_show", methods={"GET","POST"} )
      */
-    public function show(Event $event): Response
+    public function show(Request $request, Event $event, CommentEventRepository $commentEventRepository): Response
     {
         $complet=false;
         $result=false;
         $nbr=0;
         foreach ($event->getParticipations() as $p){
-            if($p->getUserId()==self::$uid){
+            if($p->getUser()->getId()==self::$uid){
                 $result=true;
                 $nbr++;
             }
@@ -131,12 +151,43 @@ class EventController extends AbstractController
                 FROM App\Entity\Participation p
                 WHERE p.event = :e')
             ->setParameter('e', $event)->getResult();
+        $suggestedEvents = $this->getDoctrine()->getManager()
+            ->createQuery('SELECT se
+                FROM App\Entity\Event se
+                WHERE se.Category = :c')
+            ->setParameter('c', $event->getCategory())->setMaxResults(2)->getResult();
+        $comments = $this->getDoctrine()->getManager()
+            ->createQuery('SELECT c
+                FROM App\Entity\CommentEvent c
+                WHERE c.event = :e')
+            ->setParameter('e', $event)->getResult();
+
+        $comment = new CommentEvent();
+        $form = $this->createForm(CommentEventType::class, $comment);
+        $form->handleRequest($request);
+
+        $comment->setDate(new \DateTime());
+        $comment->setUser($this->getUser());
+        $comment->setEvent($event);
+
+        if ($form->isSubmitted()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('event_index');
+        }
+
         return $this->render('event/show.html.twig', [
             'participants' => $participants,
             'event' => $event,
             'uid' => self::$uid,
             'exist' => $result,
             'complet' => $complet,
+            'comments' => $comments,
+            'form' => $form->createView(),
+            'suggestedEvents' => $suggestedEvents,
+
         ]);
     }
 
@@ -185,6 +236,8 @@ class EventController extends AbstractController
         return $this->redirectToRoute('event_index');
     }
 
+
+
     /**
      * @Route("/dashboard/events", name="back_events")
      */
@@ -219,11 +272,16 @@ class EventController extends AbstractController
                 FROM App\Entity\Participation p
                 WHERE p.event = :e')
             ->setParameter('e', $event)->getResult();
+        $comments = $this->getDoctrine()->getManager()
+            ->createQuery('SELECT c
+                FROM App\Entity\CommentEvent c
+                WHERE c.event = :e')
+            ->setParameter('e', $event)->getResult();
         return $this->render('dashboard/events/show.html.twig', [
             'event' => $event,
             'participants' => $participants,
+            'comments' => $comments,
         ]);
     }
-
 
 }

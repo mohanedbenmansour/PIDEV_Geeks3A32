@@ -4,219 +4,242 @@
 
 {% block body %}
   <link rel="stylesheet" type="text/css" href="{{asset('css/style1.css')}}" />
+  <main>
+  <div class="main-section">
+    <div id="content" class="site-content hfeed site" style="margin: 0px">
+      <div id="primary" class="container">
+        <div class="primary-content-wrapper">
 
-  <style>
-    .example-wrapper { margin: 1em auto; max-width: 1000px; width: 100%; font: 18px/1.5 sans-serif; }
-</style>
 
-<div class="search-sec">
-  <div class="container">
-    <div class="search-box">
-      <form>
-        <input type="text" name="search" placeholder="Search keywords">
-        <button type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</div>
 
-<div id="content" class="site-content hfeed site" style="margin: 0px">
-  <div id="primary" class="container">
-    <div class="primary-content-wrapper">
-      
-        
-      <div class="col-lg-12">
-        <div class="post-st">
+          <div class="post-st">
             <ul>
-                <li>
-                <a class="active" href="{{ path('event_new') }}" title="" 
-                style="margin-bottom:20px; margin-right: 150px">Create Event</a>
-                </li>
+              <li>
+                <a class="active" href="{{ path('event_new') }}" title=""
+                   style="margin-bottom:10px; margin-right: 100px">Create Event</a>
+              </li>
             </ul>
-        </div>
-
-        <div id="ajax-filter-panel" class="responsive-flex">
-          <div class="ui-block-title">
-            <div class="w-select">
-              <div class="title">Filter By:</div>
-                <fieldset class="form-group is-empty">
-                <div class="btn-group bootstrap-select form-control category">
-                  <button type="button" class="btn dropdown-toggle bs-placeholder btn-secondary" data-toggle="dropdown" role="button" title="All Categories">
-                    <span class="filter-option pull-left">All Categories</span>&nbsp;
-                    <span class="bs-caret">
-                    <span class="caret"></span>
-                    </span>
-                  </button>
-                  <div class="dropdown-menu open" role="combobox">
-                    <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
-                      <li data-original-index="0" class="selected">
-                        <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true">
-                          <span class="text">All Categories</span>
-                          <span class="glyphicon glyphicon-ok check-mark"></span>
-                        </a>
-                      </li>
-                      <li data-original-index="1">
-                        <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-                          <span class="text">Community</span>
-                          <span class="glyphicon glyphicon-ok check-mark"></span>
-                        </a>
-                      </li>
-                      <li data-original-index="2">
-                        <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-                          <span class="text">Inspiration</span>
-                          <span class="glyphicon glyphicon-ok check-mark"></span>
-                        </a>
-                      </li>
-                      <li data-original-index="3">
-                        <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-                          <span class="text">Olympus News</span>
-                          <span class="glyphicon glyphicon-ok check-mark"></span>
-                        </a>
-                      </li>
-                      <li data-original-index="4">
-                        <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-                          <span class="text">Uncategorized</span>
-                          <span class="glyphicon glyphicon-ok check-mark"></span>
-                        </a>
-                      </li>
-                      <li data-original-index="5">
-                        <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
-                          <span class="text">youzify_media</span>
-                          <span class="glyphicon glyphicon-ok check-mark"></span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  <select class="selectpicker form-control category" tabindex="-98">
-                    <option value="" data-url="https://olympus.crumina.net/">All Categories</option>
-                    <option data-url="https://olympus.crumina.net/category/community/" value="20">Community</option>
-                    <option data-url="https://olympus.crumina.net/category/inspiration/" value="17">Inspiration</option>
-                    <option data-url="https://olympus.crumina.net/category/olympus-news/" value="18">Olympus News</option>
-                    <option data-url="https://olympus.crumina.net/category/uncategorized/" value="1">Uncategorized</option>
-                    <option data-url="https://olympus.crumina.net/category/youzify_media/" value="91">youzify_media</option>
-                  </select>
-                </div>
-                <span class="material-input"></span></fieldset>
-              </div>
-            <div class="w-select">
-              <fieldset class="form-group">
-              <div class="btn-group bootstrap-select form-control order"><button type="button" class="btn dropdown-toggle btn-secondary" data-toggle="dropdown" role="button" title="DESC"><span class="filter-option pull-left">DESC</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="0" class="selected"><a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">DESC</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">ASC</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select class="selectpicker form-control order" tabindex="-98">
-                <option value="DESC">DESC</option>
-                <option value="ASC">ASC</option>
-                </select>
-              </div>
-              <span class="material-input"></span></fieldset>
-            </div>
-            <div class="w-select">
-              <fieldset class="form-group">
-              <div class="btn-group bootstrap-select form-control order-by"><button type="button" class="btn dropdown-toggle btn-secondary" data-toggle="dropdown" role="button" title="Order by date"><span class="filter-option pull-left">Order by date</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="0" class="selected"><a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Order by date</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Order by name</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Order by number of comments</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Order by author</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select class="selectpicker form-control order-by" tabindex="-98">
-                <option value="date">Order by date</option>
-                <option value="name">Order by name</option>
-                <option value="comment_count">Order by number of comments</option>
-                <option value="author">Order by author</option>
-                </select>
-              </div>
-              <span class="material-input"></span></fieldset>
-            </div>
-            <a href="#" class="btn reset-btn btn-primary btn-md-2">All Categories</a>
-            <form class="w-search">
-              <div class="form-group with-button is-empty">
-                <input class="form-control" type="text" placeholder="Search Blog Posts...">
-                <button class="search-btn">
-                <i class="olympus-icon-Magnifying-Glass-Icon"></i>
-                </button>
-                <span class="material-input"></span>
-              </div>
-            </form>
           </div>
-        </div> 
-      </div>
 
-      <div class="col-md-12 col-sm-12 col-lg-12">
-        <main class="site-main content-main-full">
-          <div class="post-list row  " style="margin: 0px -20px">
-            {% for event in events %}
-            <div class="col-xl-4 col-lg-4 col-md-6 may-contain-custom-bg ui-block ajax-col-equal-height shadow wc-block-grid" style="max-width:32.5%;margin-right:4px;margin-left:4px;margin-bottom: 10px;padding: 0px;text-align: left">
-              <div class="post-thumb" style"margin-top: 5px">
-                <center<><img src="/uploads/{{ event.img }}" alt="image event"style="display: block;
+          <div id="ajax-filter-panel" class="responsive-flex">
+            <div class="ui-block-title" style="background-color: #fff; margin-bottom: 10px">
+              <div class="w-select">
+                <div class="title">Filter By:</div>
+                <fieldset class="form-group is-empty">
+                  <div class="btn-group bootstrap-select form-control category">
+                    <button type="button" class="btn dropdown-toggle bs-placeholder btn-secondary" data-toggle="dropdown" role="button" title="All Categories">
+                      <span class="filter-option pull-left">All Categories</span>&nbsp;
+                      <span class="bs-caret">
+                  <span class="caret"></span>
+                  </span>
+                    </button>
+                    <div class="dropdown-menu open" role="combobox">
+                      <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
+                        <li data-original-index="0" class="selected">
+                          <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true">
+                            <span class="text">All Categories</span>
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                          </a>
+                        </li>
+                        <li data-original-index="1">
+                          <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
+                            <span class="text">Community</span>
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                          </a>
+                        </li>
+                        <li data-original-index="2">
+                          <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
+                            <span class="text">Inspiration</span>
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                          </a>
+                        </li>
+                        <li data-original-index="3">
+                          <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
+                            <span class="text">Olympus News</span>
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                          </a>
+                        </li>
+                        <li data-original-index="4">
+                          <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
+                            <span class="text">Uncategorized</span>
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                          </a>
+                        </li>
+                        <li data-original-index="5">
+                          <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
+                            <span class="text">youzify_media</span>
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <select class="selectpicker form-control category" tabindex="-98">
+                      <option value="" data-url="https://olympus.crumina.net/">All Categories</option>
+                      <option data-url="https://olympus.crumina.net/category/community/" value="20">Community</option>
+                      <option data-url="https://olympus.crumina.net/category/inspiration/" value="17">Inspiration</option>
+                      <option data-url="https://olympus.crumina.net/category/olympus-news/" value="18">Olympus News</option>
+                      <option data-url="https://olympus.crumina.net/category/uncategorized/" value="1">Uncategorized</option>
+                      <option data-url="https://olympus.crumina.net/category/youzify_media/" value="91">youzify_media</option>
+                    </select>
+                  </div>
+                  <span class="material-input"></span></fieldset>
+              </div>
+              <div class="w-select">
+                <fieldset class="form-group">
+                  <div class="btn-group bootstrap-select form-control order"><button type="button" class="btn dropdown-toggle btn-secondary" data-toggle="dropdown" role="button" title="DESC"><span class="filter-option pull-left">DESC</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="0" class="selected"><a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">DESC</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">ASC</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select class="selectpicker form-control order" tabindex="-98">
+                      <option value="DESC">DESC</option>
+                      <option value="ASC">ASC</option>
+                    </select>
+                  </div>
+                  <span class="material-input"></span></fieldset>
+              </div>
+              <div class="w-select">
+                <fieldset class="form-group">
+                  <div class="btn-group bootstrap-select form-control order-by">
+                    <button type="button" class="btn dropdown-toggle btn-secondary" data-toggle="dropdown" role="button" title="Order by date">
+                      <span class="filter-option pull-left">Order by date</span>&nbsp;
+                      <span class="bs-caret">
+                  <span class="caret"></span>
+                </span>
+                    </button>
+                    <div class="dropdown-menu open" role="combobox">
+                      <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
+                        <li data-original-index="0" class="selected">
+                          <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true">
+                            <span class="text">Order by date</span>
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                          </a>
+                        </li>
+                        <li data-original-index="1">
+                          <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
+                            <span class="text">Order by name</span>
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                          </a>
+                        </li>
+                        <li data-original-index="2">
+                          <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
+                            <span class="text">Order by number of comments</span>
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                          </a>
+                        </li>
+                        <li data-original-index="3">
+                          <a tabindex="0" class=" dropdown-item" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
+                            <span class="text">Order by author</span>
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <select class="selectpicker form-control order-by" tabindex="-98">
+                      <option value="date">Order by date</option>
+                      <option value="name">Order by name</option>
+                      <option value="comment_count">Order by number of comments</option>
+                      <option value="author">Order by author</option>
+                    </select>
+                  </div>
+                  <span class="material-input"></span></fieldset>
+              </div>
+              <a href="#" class="btn reset-btn btn-primary btn-md-2">All Categories</a>
+              <form class="w-search">
+                <div class="form-group with-button is-empty">
+                  <input class="form-control" type="text" placeholder="Search Event...">
+                  <button class="search-btn">
+                    <i class="olympus-icon-Magnifying-Glass-Icon"></i>
+                  </button>
+                  <span class="material-input"></span>
+                </div>
+              </form>
+            </div>
+          </div>
+
+
+          <div class="col-md-12 col-sm-12 col-lg-12">
+            <div class="site-main content-main-full">
+              <div class="post-list row  " style="margin: 0px -20px">
+                {% for event in events %}
+                <div class="col-xl-4 col-lg-4 col-md-6 may-contain-custom-bg ui-block ajax-col-equal-height shadow wc-block-grid" style="max-width:32.5%;margin-right:4px;margin-left:4px;margin-bottom: 10px;padding: 0px;text-align: left">
+                  <div class="post-thumb" style"margin-top: 5px">
+                  <center><img src="/uploads/{{ event.img }}" alt="image event"style="display: block;
                                                                             margin-left: auto;
                                                                             margin-right: auto;
                                                                             width: auto;
                                                                             height: 243px;
                                                                             "></center>
-              </div>
-              <div class="post-content" >
-                <div class="post_topbar" style="padding: 15px 15px 10px; background-color: #fff;">
-                  <div class="usy-dt">
-                    <img class="img-event" src="/uploads/{{ event.img }}" alt="{{ event.img }}"  width= 50px alt="">
-                    <div class="usy-name">
-                      <h3>{{ event.name }}</h3>
-                      <span><img src="../images/clock.png" alt=""> {{ event.datePub ? event.datePub|date('Y-m-d H:i:s') : '' }} </span>
-                    </div>
-                  </div>
-                  {% if uid == event.userId %}
-                  <div class="ed-opts">
-                    <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                    <ul class="ed-options">
-                      <li><a href="{{ path('event_edit', {'id': event.id}) }}" title="">Edit Event</a></li>
-                      <li><form method="post" action="{{ path('event_delete', {'id': event.id}) }}" onsubmit="return confirm('Are you sure you want to delete this event?');">
-                          <input type="hidden" name="_method" value="DELETE">
-                          <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
-                          <button>Delete Event</button>
-                        </form></li>
-                      <li><a href="#" title="">Report Event</a></li>
-                    </ul>
-                  </div>
-                  {% endif %}
                 </div>
-                <div class="epi-sec" style="padding: 0px 15px 0px; background-color: #fff;">
-                  <ul class="descp" style="margin:0px 0px">
-                    <li><img src="../images/icon9.png" alt=""><span>{{ event.lieu }}</span></li>
-                    <li><img src="../images/icon10.png" alt=""><span>{{ event.dateDebut ? event.dateDebut|date('Y-m-d H:i:s') : '' }}</span></li>
-                    <li><img src="../images/icon10.png" alt=""><span>{{ event.dateFin ? event.dateFin|date('Y-m-d H:i:s') : '' }}</span></li>
+                <div class="post-content" >
+                  <div class="post_topbar" style="padding: 15px 15px 10px; background-color: #fff;">
+                    <div class="usy-dt">
+                      <img class="img-event" src="/uploads/{{ event.user.image }}" alt="{{ event.user.image }}"  width= 50px alt="">
+                      <div class="usy-name">
+                        <h3>{{ event.name }}</h3>
+                        <span><img src="../images/clock.png" alt=""> {{ event.datePub ? event.datePub|date('Y-m-d H:i:s') : '' }} </span>
+                      </div>
+                    </div>
+                    {% if app.user.id == event.user.id %}
+                      <div class="ed-opts">
+                        <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+                        <ul class="ed-options">
+                          <li><a href="{{ path('event_edit', {'id': event.id}) }}" title="">Edit Event</a></li>
+                          <li><form method="post" action="{{ path('event_delete', {'id': event.id}) }}" onsubmit="return confirm('Are you sure you want to delete this event?');">
+                              <input type="hidden" name="_method" value="DELETE">
+                              <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
+                              <button>Delete Event</button>
+                            </form></li>
+                          <li><a href="#" title="">Report Event</a></li>
+                        </ul>
+                      </div>
+                    {% endif %}
+                  </div>
+                  <div class="epi-sec" style="padding: 0px 15px 0px; background-color: #fff;">
+                    <ul class="descp" style="margin:0px 0px">
+                      <li><img src="../images/icon9.png" alt=""><span>{{ event.lieu }}</span></li>
+                      <li><img src="../images/icon10.png" alt=""><span>{{ event.dateDebut ? event.dateDebut|date('Y-m-d H:i:s') : '' }}</span></li>
+                      <li><img src="../images/icon10.png" alt=""><span>{{ event.dateFin ? event.dateFin|date('Y-m-d H:i:s') : '' }}</span></li>
 
-                  </ul>
-                  {#<ul class="bk-links">
-                    
+                    </ul>
+                    {#<ul class="bk-links">
+
                     <li><a href="{{ path('add_participation', {'id': event.id}) }}" title="" class="bid_now">Participer</a></li>
                   </ul>#}
-                </div>
-                <div class="job_descp" style="padding: 0px 20px 0px; background-color: #fff;">
-                  {#<h3>Simple Classified Site</h3>#}
-                  
-                  <div style="max-width: 420px; margin: 38px auto;">
-                  <p style="overflow: hidden !important; display: -webkit-box !important; -webkit-line-clamp: 3 !important; -webkit-box-orient: vertical !important;">
-                  {{ event.description |raw}}<a href="#" title=""></a></p>
                   </div>
-                  <ul class="job-dt" style="margin-bottom:5px">
-                    {% if (event.prix == 0 ) %} 
-                      <li><span>Gratuit</span></li>
-                        {% else %}
-                      <li><span>{{ event.prix }}DT</span></li>
-                    {% endif %} 
-                    <li class="bk-links"><a style="font-size:16px; padding:0px 10px" href="{{ path('event_show', {'id': event.id}) }}" title="" class="bid_now">Afficher</a></li>
-                  </ul>
-                </div>
-                <div class="job-status-bar" style="padding: 0px 30px 10px; background-color: #fff;">
-                  <ul class="like-com">
-                    <li>
-                      <a href="#" class="active"><i class="fas fa-heart"></i> Like</a>
-                      <img src="../images/liked-img.png" alt="">
-                      <span>25</span>
-                    </li>
-                    <li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comments 15</a></li>
-                  </ul>
+                  <div class="job_descp" style="padding: 0px 20px 0px; background-color: #fff;">
+                    {#<h3>Simple Classified Site</h3>#}
+
+                    <div style="max-width: 420px; margin: 38px auto;">
+                      <p style="overflow: hidden !important; display: -webkit-box !important; -webkit-line-clamp: 3 !important; -webkit-box-orient: vertical !important;">
+                        {{ event.description |raw}}<a href="#" title=""></a></p>
+                    </div>
+                    <ul class="job-dt" style="margin-bottom:5px">
+                      {% if (event.prix == 0 ) %}
+                        <li><span>Gratuit</span></li>
+                      {% else %}
+                        <li><span>{{ event.prix }}DT</span></li>
+                      {% endif %}
+                      <li class="bk-links"><a style="font-size:16px; padding:0px 10px" href="{{ path('event_show', {'id': event.id}) }}" title="" class="bid_now">Afficher</a></li>
+                    </ul>
+                  </div>
+                  <div class="job-status-bar" style="padding: 0px 30px 10px; background-color: #fff;">
+                    <ul class="like-com">
+                      <li>
+                        <a href="#" class="active"><i class="fas fa-heart"></i> Like</a>
+                        <img src="../images/liked-img.png" alt="">
+                        <span>25</span>
+                      </li>
+                      <li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comments 15</a></li>
+                    </ul>
+                  </div>
                 </div>
               </div>
+              {% endfor %}
             </div>
-            {% endfor %}
+
           </div>
+        </div>
 
-        </main>
       </div>
-
     </div>
   </div>
-</div>
   <a style="">{{ knp_pagination_render(events) }}</a>
+  </main>
+
 {% endblock %}

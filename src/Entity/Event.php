@@ -76,11 +76,6 @@ class Event
     private $datePub;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $userId;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Url(
      *    message = "The url '{{ value }}' is not a valid url",
@@ -99,11 +94,23 @@ class Event
      * @ORM\JoinColumn(nullable=false)
      */
     private $Category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CommentEvent::class, mappedBy="Event")
+     */
+    private $comments;
     
 
     public function __construct()
     {
         $this->participations = new ArrayCollection();
+        $this->date = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -178,19 +185,6 @@ class Event
 
         return $this;
     }
-
-    public function getUserId(): ?int
-    {
-        return $this->userId;
-    }
-
-    public function setUserId(int $userId): self
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
     
     public function getName(): ?string
     {
@@ -291,6 +285,47 @@ class Event
     {
         $this->Category = $Category;
 
+        return $this;
+    }
+
+    public function getUser(): ?Utilisateur
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Utilisateur $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommentEvent[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->date;
+    }
+
+    public function addComment(CommentEvent $comment): self
+    {
+        if (!$this->comment->contains($comment)) {
+            $this->comment[] = $comment;
+            $comment->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(CommentEvent $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getEvent() === $this) {
+                $comment->setEvent(null);
+            }
+        }
         return $this;
     }
 
