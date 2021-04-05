@@ -33,6 +33,17 @@
     {% endblock %}
 
     {% block javascripts %}
+        <script type="text/javascript">
+            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+            (function(){
+                var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+                s1.async=true;
+                s1.src='https://embed.tawk.to/606a3442067c2605c0bf3497/1f2fdo8tq';
+                s1.charset='UTF-8';
+                s1.setAttribute('crossorigin','*');
+                s0.parentNode.insertBefore(s1,s0);
+            })();
+        </script>
         <script src="https://js.stripe.com/v3/"></script>
 
         <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
@@ -49,16 +60,9 @@
                 integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
                 crossorigin="anonymous">
         </script>
-
-
-
     {% endblock %}
-
 </head>
 <body>
-
-
-
 {% block nav %}
     <header class="bg-dark">
         <div class="container">
@@ -101,7 +105,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="profiles.html" title="">
+                            <a href="{{ path('profil') }}" title="">
                                 <span><img src="{{asset('images/icon4.png')}}" alt="" /></span>
                                 Profiles
                             </a>

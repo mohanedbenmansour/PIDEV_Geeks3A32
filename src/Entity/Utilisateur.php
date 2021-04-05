@@ -86,6 +86,22 @@ class Utilisateur implements UserInterface
      */
     private $youtubeChannel;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ParticipationT::class, mappedBy="userT")
+     */
+    private $participationTs;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Tournoi::class, mappedBy="userT")
+     */
+    private $tournois;
+
+    public function __construct()
+    {
+        $this->participationTs = new ArrayCollection();
+        $this->tournois = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -278,6 +294,66 @@ class Utilisateur implements UserInterface
     public function setYoutubeChannel(?string $youtubeChannel): self
     {
         $this->youtubeChannel = $youtubeChannel;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ParticipationT[]
+     */
+    public function getParticipationTs(): Collection
+    {
+        return $this->participationTs;
+    }
+
+    public function addParticipationT(ParticipationT $participationT): self
+    {
+        if (!$this->participationTs->contains($participationT)) {
+            $this->participationTs[] = $participationT;
+            $participationT->setUserT($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipationT(ParticipationT $participationT): self
+    {
+        if ($this->participationTs->removeElement($participationT)) {
+            // set the owning side to null (unless already changed)
+            if ($participationT->getUserT() === $this) {
+                $participationT->setUserT(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tournoi[]
+     */
+    public function getTournois(): Collection
+    {
+        return $this->tournois;
+    }
+
+    public function addTournoi(Tournoi $tournoi): self
+    {
+        if (!$this->tournois->contains($tournoi)) {
+            $this->tournois[] = $tournoi;
+            $tournoi->setUserT($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTournoi(Tournoi $tournoi): self
+    {
+        if ($this->tournois->removeElement($tournoi)) {
+            // set the owning side to null (unless already changed)
+            if ($tournoi->getUserT() === $this) {
+                $tournoi->setUserT(null);
+            }
+        }
 
         return $this;
     }

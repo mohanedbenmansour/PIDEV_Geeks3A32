@@ -44,13 +44,13 @@ class UtilisateurController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        else if(in_array('ROLE_USER', $utilisateur->getRoles())){
+        else {
             return $this->render('utilisateur/index.html.twig', [
                 'utilisateurs' => $utilisateurRepository->findAll(),
             ]);
         }
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('home_page');
     }
 
     /**

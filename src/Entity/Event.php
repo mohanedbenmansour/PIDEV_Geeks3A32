@@ -30,12 +30,14 @@ class Event
     /**
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message="Date Debut is required")
+     * @Assert\GreaterThan("today")
      */
     private $dateDebut;
     
     /**
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message="Date Fin is required")
+     * @Assert\GreaterThan(propertyPath="dateDebut")
      */
     private $dateFin;
 
@@ -53,6 +55,7 @@ class Event
     
     /**
      * @ORM\Column(type="integer")
+     * @Assert\GreaterThanOrEqual(0)
      */
     private $nbParticipants;
     
@@ -104,7 +107,7 @@ class Event
     /**
      * @ORM\OneToMany(targetEntity=CommentEvent::class, mappedBy="Event")
      */
-    private $comments;
+    private $commentEvents;
     
 
     public function __construct()
@@ -303,27 +306,27 @@ class Event
     /**
      * @return Collection|CommentEvent[]
      */
-    public function getComments(): Collection
+    public function getCommentsEvents(): Collection
     {
-        return $this->date;
+        return $this->commentEvents;
     }
 
-    public function addComment(CommentEvent $comment): self
+    public function addCommentEvents(CommentEvent $commentEvents): self
     {
-        if (!$this->comment->contains($comment)) {
-            $this->comment[] = $comment;
-            $comment->setEvent($this);
+        if (!$this->commentEvents->contains($commentEvents)) {
+            $this->commentEvents[] = $commentEvents;
+            $commentEvents->setEvent($this);
         }
 
         return $this;
     }
 
-    public function removeComment(CommentEvent $comment): self
+    public function removeCommentEvents(CommentEvent $commentEvents): self
     {
-        if ($this->comments->removeElement($comment)) {
+        if ($this->commentEvents->removeElement($commentEvents)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getEvent() === $this) {
-                $comment->setEvent(null);
+            if ($commentEvents->getEvent() === $this) {
+                $commentEvents->setEvent(null);
             }
         }
         return $this;
