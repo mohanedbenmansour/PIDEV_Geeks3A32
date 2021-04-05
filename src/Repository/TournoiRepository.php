@@ -17,6 +17,42 @@ class TournoiRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Tournoi::class);
+
+    }
+
+    public function getPaginatedTournois($page, $limit, $filters = null){
+        $query = $this->createQueryBuilder('tournoi')
+            ->where('tournoi.active = 1');
+        ;
+
+        // On filtre les données
+        if($filters != null){
+            $query->andWhere('tournoi.category IN(:cats)')
+                ->setParameter(':cats', array_values($filters));
+        }
+
+        $query->orderBy('tournoi.date_publication')
+            ->setFirstResult(($page * $limit) - $limit)
+            ->setMaxResults($limit)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Returns number of Annonces
+     * @return void
+     */
+    public function getTotalTournois($filters = null){
+        $query = $this->createQueryBuilder('tournoi')
+            ->select('COUNT(tournoi)')
+            ->where('tournoi.active = 1');
+        // On filtre les données
+        if($filters != null){
+            $query->andWhere('tournoi.category IN(:cats)')
+                ->setParameter(':cats', array_values($filters));
+        }
+
+        return $query->getQuery()->getSingleScalarResult();
     }
 
     public function findTournoiByname($nom){

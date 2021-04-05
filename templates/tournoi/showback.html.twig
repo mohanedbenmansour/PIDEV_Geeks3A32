@@ -3,6 +3,8 @@
 {% block title %}Tournoi{% endblock %}
 
 {% block main %}
+
+
     <h1>Tournoi</h1>
 
     <table class="table">
@@ -39,12 +41,29 @@
                 <th>Date_publication</th>
                 <td>{{ tournoi.datePublication ? tournoi.datePublication|date('Y-m-d') : '' }}</td>
             </tr>
+            <tr>
+                <th>Lien media</th>
+                <td>{{ tournoi.LienYoutube }}</td>
+            </tr>
+            <tr>
+                <th>Active/desactive</th>
+                <td>{{ tournoi.active }}</td>
+            </tr>
         </tbody>
+
+
+        <td>
+            {% if ( tournoi.active ==1) %}
+            <a href="{{ path('desactiver', {'id': tournoi.id}) }}">Desactiver</a>
+            {% else %}
+            <a href="{{ path('desactiver', {'id': tournoi.id}) }}">Activer</a>
+            {% endif %}
+
+        </td>
+        <td>
+            <a href="{{ path('tournoi_edit', {'id': tournoi.id}) }}">edit</a>
+        </td>
+
     </table>
-
     <a href="{{ path('tournoi_indexback') }}">back to list</a>
-
-    <a href="{{ path('tournoi_edit', {'id': tournoi.id}) }}">edit</a>
-
-
 {% endblock %}

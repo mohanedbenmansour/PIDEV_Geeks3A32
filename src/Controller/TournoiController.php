@@ -3,17 +3,25 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Participation;
+use App\Entity\ParticipationT;
+use App\Entity\Utilisateur;
 use App\Entity\Tournoi;
 use App\Form\TournoiType;
+use App\Form\TournoibackType;
+use App\Repository\EventRepository;
+use App\Repository\UtilisateurRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\TournoiRepository;
 use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 
@@ -25,21 +33,34 @@ class TournoiController extends AbstractController
     /**
      * @Route("/", name="tournoi_index", methods={"GET"})
      */
-    public function index(TournoiRepository $tournoiRepository,Request $request, PaginatorInterface $paginator): Response
+    public function index(TournoiRepository $tournoiRepository,CategoryRepository $catRepo,Request $request)
     {
-        $tournoi = $tournoiRepository->findAll();
-        $pagination = $paginator->paginate( $tournoi,
-// Define the page parameter
-            $request->query->getInt('page', 1),
-            4);
 
-        return $this->render('tournoi/index.html.twig', [
-            'tournois'=>$tournoi,
-            'controller_name' => 'DemandeController',
+        $limit = 6;
 
-            'pagination'=>$pagination,
-        ]);
+        // On récupère le numéro de page
+        $page = (int)$request->query->get("page", 1);
+
+        // On récupère les filtres
+        $filters = $request->get("categorys");
+
+        // On récupère les annonces de la page en fonction du filtre
+        $tournois = $tournoiRepository->getPaginatedTournois($page, $limit, $filters);
+
+        // On récupère le nombre total d'annonces
+        $total = $tournoiRepository->getTotalTournois($filters);
+
+        if($request->get('ajax')){
+            return new JsonResponse([
+                'content' => $this->renderView('tournoi/index_content.html.twig',compact('tournois', 'total', 'limit', 'page'))
+                ]);
+        }
+
+        $categorys = $catRepo->findAll();
+
+        return $this->render('tournoi/index.html.twig',compact('tournois', 'total', 'limit', 'page', 'categorys'));
     }
+
     /**
      * @Route("/indexback", name="tournoi_indexback", methods={"GET"})
      */
@@ -49,6 +70,9 @@ class TournoiController extends AbstractController
             'tournois' => $tournoiRepository->findAll(),
         ]);
     }
+
+
+
 
 
     /**
@@ -81,6 +105,7 @@ class TournoiController extends AbstractController
 
 
 
+
             $entityManager->persist($tournoi);
             $entityManager->flush();
 
@@ -98,26 +123,83 @@ class TournoiController extends AbstractController
      */
     public function show(Tournoi $tournoi): Response
     {
+        $test=$tournoi->getLienYoutube();
+        $test=strrchr($test,'=');
+        $tournoi->setLienYoutube(substr($test,1));
+        $participantsT = $this->getDoctrine()->getManager()
+            ->createQuery('SELECT p
+                FROM App\Entity\ParticipationT p
+                WHERE p.tournoi = :t')
+            ->setParameter('t', $tournoi)->getResult();
 
         return $this->render('tournoi/show.html.twig', [
             'tournoi' => $tournoi,
+            'participantsT' => $participantsT,
+
         ]);
     }
     /**
-     * @Route("/{id}", name="participer", methods={"GET","POST"})
+     * @Route("/indexback/{id}/active", name="desactiver", methods={"GET","POST"})
      */
-    public function participate(Tournoi $tournoi, int $id): Response
+    public function desactiver(Tournoi $tournois, int $id ,TournoiRepository $repository): Response
     {
 
         $repository = $this->getDoctrine()->getRepository(Tournoi::class);
-        $tournoi=$repository->find($id);
-        $tournoi->setNbMax($tournoi->getNbMax()-1);
+        $tournois=$repository->find($id);
+        $test=$tournois->getActive();
+        if($test==1){
+        $tournois->setActive(0);
+        }
+        else {
+            $tournois->setActive(1);
+        }
         $this->getDoctrine()->getManager()->flush();
-        return $this->render('tournoi/show.html.twig', [
-            'tournoi' => $tournoi,
+        return $this->redirectToRoute('tournoi_showback', [
+            'tournoi' => $tournois,
             'id'=>$id,
         ]);
+
     }
+
+
+
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/{id}/addparticipant", name="participer", methods={"GET","POST"})
+     */
+
+    public function participate(Request $request,tournoi $tournois, $id ,TournoiRepository $tournoiRepository,Session $session): Response
+    {
+
+        $tournoi=$tournoiRepository->find($id);
+        $nbr=0;
+        $this->getUser();
+        foreach ($tournoi->getParticipationTs() as $p){
+
+        }
+        if($nbr < $tournoi->getNbMax()){
+            $participation = new ParticipationT();
+            $participation->setUserT($this->getUser());
+            $tournoi->getId();
+            $participation->setTournoi($tournoi);
+
+            $tournoi->addParticipationT($participation);
+            $tournoi->setNbMax($tournoi->getNbMax()-1);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($participation);
+            $em->flush();
+
+            return $this->redirectToRoute('tournoi_show', [
+                'tournoi' => $tournoi,
+                'id'=>$id,
+            ]);
+        }
+        else return $this->redirectToRoute('tournoi_show');
+    }
+
 
     /**
      * @Route("/indexback/{id}", name="tournoi_showback", methods={"GET"})
@@ -161,6 +243,38 @@ class TournoiController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    /**
+     * @Route("/{id}/editback", name="tournoi_editback", methods={"GET","POST"})
+     */
+    public function editback(Request $request, Tournoi $tournoi): Response
+    {
+        $formback = $this->createForm(TournoibackType::class, $tournoi);
+        $formback->handleRequest($request);
+
+        if ($formback->isSubmitted() && $formback->isValid()) {
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $formback['imageFile']->getData();
+            $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+            $uploadedFile->move(
+                $destination,
+                $newFilename
+            );
+            $tournoi->setImage($newFilename);
+
+
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('tournoi_indexback');
+        }
+
+        return $this->render('tournoi/editback.html.twig', [
+            'tournoi' => $tournoi,
+            'form' => $formback->createView(),
+        ]);
+    }
 
     /**
      * @Route("/{id}", name="tournoi_delete", methods={"DELETE"})
@@ -188,3 +302,4 @@ class TournoiController extends AbstractController
         return new Response($retour);
     }
 }
+

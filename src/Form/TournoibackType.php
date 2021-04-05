@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Category;
 use App\Entity\Tournoi;
 use App\Entity\User;
-use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
-class TournoiType extends AbstractType
+class TournoibackType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -34,7 +33,7 @@ class TournoiType extends AbstractType
 
             )
             ->add('Lien_youtube')
-
+            ->add('active')
             ->add('adresse')
             ->add('date_tournoi')
             ->add('Nb_max')

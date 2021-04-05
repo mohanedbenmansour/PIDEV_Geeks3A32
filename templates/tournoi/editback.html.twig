@@ -1,8 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.back.html.twig' %}
 
-{% block title %}New Tournoi{% endblock %}
+{% block title %}Edit Tournoi{% endblock %}
 
-{% block body %}
+{% block main %}
+    <h1>Edit Tournoi</h1>
     <style>
         * {
             font-family: "Roboto";
@@ -111,77 +112,10 @@
         }
 
     </style>
-    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
-<div class="container text-center">
+    {{ include('tournoi/_form.html.twig', {'button_label': 'Update'}) }}
 
-<h1><strong class="text-danger"> Ajouter un Tournoi </strong></h1>
-</div>
-    <table  class="table">
 
-        <tr>
-
-            {{ form_errors(form.Nom ) }}
-           <th style="width: 20px"> {{ form_label(form.Nom ,"Nom du tournoi") }}</th>
-           <th> {{ form_widget(form.Nom ) }}</th>
-
-        </tr>
-        <tr>
-
-                {{ form_errors(form.description) }}
-            <th style="width: 20px"> {{ form_label(form.description,"Description") }}</th>
-            <th>    {{ form_widget(form.description) }}</th>
-
-        </tr>
-        <tr>
-
-            {{ form_errors(form.category) }}
-            <th style="width: 20px"> {{ form_label(form.category,"Type du Tournoi") }}</th>
-            <th>    {{ form_widget(form.category) }}</th>
-
-        </tr>
-        <tr>
-
-                {{ form_errors(form.Nb_max) }}
-            <th style="width: 20px">    {{ form_label(form.Nb_max,"Nombre de participant") }}</th>
-            <th>    {{ form_widget(form.Nb_max) }}</th>
-
-        </tr>
-        <tr>
-
-                {{ form_errors(form.adresse) }}
-            <th style="width: 20px">    {{ form_label(form.adresse,"Adresse du tournoi") }}</th>
-            <th>    {{ form_widget(form.adresse) }}</th>
-
-        </tr>
-        <tr>
-
-                {{ form_errors(form.imageFile) }}
-            <th style="width: 20px">      {{ form_label(form.imageFile,"Image du tournoi") }}</th>
-            <th>    {{ form_widget(form.imageFile) }}</th>
-
-        </tr>
-        <tr>
-
-            {{ form_errors(form.Lien_youtube ) }}
-            <th style="width: 20px"> {{ form_label(form.Lien_youtube ,"Lien Youtube") }}</th>
-            <th> {{ form_widget(form.Lien_youtube ) }}</th>
-
-        </tr>
-        <tr>
-
-            <th style="width: 20px">   {{ form_label(form.date_tournoi ,"date tournoi") }}</th>
-            <th>   {{ form_widget(form.date_tournoi )}}</th>
-
-        </tr>
-        <tr>
-        <th style="width: 20px">
-          {{ form_widget(form.submit) }}</th>
-        </tr>
-
-    </table>
     <a href="{{ path('tournoi_index') }}">back to list</a>
 
-    {{ form_end(form) }}
-
-
+    {{ include('tournoi/_delete_form.html.twig') }}
 {% endblock %}

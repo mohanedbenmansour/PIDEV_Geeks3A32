@@ -1,0 +1,87 @@
+
+<div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="post-list row  " style="margin: 0px -20px">
+            {% for tournoi in tournois %}
+                <div class="col-xl-4 col-lg-4 col-md-6 may-contain-custom-bg ui-block ajax-col-equal-height shadow wc-block-grid" style="max-width:32.5%;margin-right:4px;margin-left:4px;margin-bottom: 10px;padding: 0px;text-align: left">
+                    <div class="post-thumb" style="margin-top: 10px">
+                        <center><a href="{{ path('tournoi_show', {'id': tournoi.id}) }}">
+                                <img src="/uploads/{{ tournoi.image }}" alt="{{ tournoi.image }}" width="500" height="200"></a></center>
+                    </div>
+                    <div class="post-content" >
+                        <div class="post_topbar" style="padding: 15px 15px 10px; background-color: #fff;">
+                            <div class="usy-dt">
+                                <img class="img-event" src="/uploads/{{ tournoi.image }}" alt="{{ tournoi.image }}"  width= 50px alt="">
+                                <div class="usy-name">
+                                    <h3>{{ tournoi.Nom }}</h3>
+                                    <span><img src="../images/clock.png" alt=""> {{ tournoi.dateTournoi ? tournoi.dateTournoi|date('Y-m-d') : '' }} </span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="epi-sec" style="padding: 0px 15px 0px; background-color: #fff;">
+                            <ul class="descp" style="margin:0px 0px">
+                                <li><img src="../images/icon9.png" alt=""><span>{{ tournoi.adresse }}</span></li>
+
+                            </ul>
+                            {#<ul class="bk-links">
+
+                    <li><a href="{{ path('add_participation', {'id': event.id}) }}" title="" class="bid_now">Participer</a></li>
+                  </ul>#}
+                            <ul>
+                        </div>
+                        <div class="job_descp" style="padding: 0px 20px 0px; background-color: #fff;">
+                            {#<h3>Simple Classified Site</h3>#}
+
+                            <div style="max-width: 420px; margin: 38px auto;">
+                                <p style="overflow: hidden !important; display: -webkit-box !important; -webkit-line-clamp: 3 !important; -webkit-box-orient: vertical !important;">
+                                    {{ tournoi.description |raw}}<a href="#" title=""></a></p>
+                                <p>{{ tournoi.category |raw}}<a href="#" title=""></a></p>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+</div>
+    {% set queryParams = app.request.query.all %}
+    {% set queryString = queryParams|filter((v, k) => k != "page" and k != "ajax")|url_encode %}
+
+<ul class="pagination" style="align-content: center;">
+    <li class="{{ (page == 1) ? 'disabled' : '' }}">
+        <a href="?page=1&{{queryString}}">
+            <i class="fas fa-step-backward"></i>
+        </a>
+    </li>
+    <li class="{{ (page == 1) ? 'disabled' : '' }}">
+        <a href="{{ (page > 1) ? '?page=' ~ (page - 1) : '' }}&{{queryString}}">
+            <i class="fas fa-angle-left"></i>
+        </a>
+    </li>
+    {% set pages = (total / limit)|round(0, 'ceil') %}
+    {% for item in 1..pages %}
+        <li class="{{ (page == item) ? 'active' : '' }}">
+            <a href="?page={{ item }}&{{queryString}}">{{ item }}</a>
+        </li>
+    {% endfor %}
+    <li class="{{ (page == pages) ? 'disabled' : '' }}">
+        <a href="{{ (page < pages) ? '?page=' ~ (page + 1) : '' }}&{{queryString}}">
+            <i class="fas fa-angle-right"></i>
+        </a>
+    </li>
+    <li class="{{ (page == pages) ? 'disabled' : '' }}">
+        <a href="?page={{ pages }}&{{queryString}}">
+            <i class="fas fa-step-forward"></i>
+        </a>
+    </li>
+
+</ul>
+
+
+<a href="{{ path('tournoi_new') }}">Create new</a>

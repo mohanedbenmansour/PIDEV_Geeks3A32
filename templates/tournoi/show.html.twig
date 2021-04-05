@@ -3,53 +3,135 @@
 {% block title %}Tournoi{% endblock %}
 
 {% block body %}
-    <h1>{{ tournoi.Nom }}</h1>
 
-    <table class="table">
-        <tbody>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/style1.css')}}" />
+    <div class="container" >
+        <div class="row">
 
-
-            <tr>
-                <th>Description</th>
-                <td>{{ tournoi.description }}</td>
-            </tr>
-            <tr>
-                <th>Type du tournoi</th>
-                <td>{{ tournoi.category }}</td>
-            </tr>
-            <tr>
-                <th>Nombre de Participants</th>
-                <td>{{ tournoi.Nbmax }}</td>
-            </tr>
-
-            <tr>
-                <th>Adresse</th>
-                <td>{{ tournoi.adresse }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td><img src="/uploads/{{ tournoi.image }}" alt="{{ tournoi.image }}" width="100" height="100"></td>
-            </tr>
-            <tr>
-                <th>Date_tournoi</th>
-                <td>{{ tournoi.dateTournoi ? tournoi.dateTournoi|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Date_publication</th>
-                <td>{{ tournoi.datePublication ? tournoi.datePublication|date('Y-m-d') : '' }}</td>
-            </tr>
-
-        </tbody>
-    </table>
-
-    <a href="{{ path('tournoi_index') }}">back to list</a>
-
-    <a href="{{ path('tournoi_edit', {'id': tournoi.id}) }}">edit</a>
-
-    <a href="{{ path('participer', {'id': tournoi.id}) }}"><button>Participer</button></a>
+            <main class="col-xl-8 m-auto col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
 
-    {{ include('tournoi/_delete_form.html.twig') }}
+                <div class="ui-block">
+                    <a href="{{ path('tournoi_index') }}" style="padding: 20px 15px 20px;">
+                        <img src="{{asset('images/back.png')}}" alt="" >
+                    </a>
+                    <article id="post-118" class="hentry blog-post single-post-olympus single-post-v1 post-118 post type-post status-publish format-standard has-post-thumbnail category-olympus-news">
 
 
-{% endblock %}
+
+                        <div class="post-category-list">
+                            <a href="category/olympus-news/index.html" class=" post-category bg-primary" style="" title="All posts from Olympus News">{{ tournoi.category }}</a>
+                        </div>
+                        <h1 class="post-title entry-title">{{ tournoi.Nom }}</h1>
+
+                        <div class="tab-feed st2 settingjb">
+                            <ul>
+                                <li data-tab="feed-dd" class="active">
+                                    <a href="#" title="">
+                                        <img src="images/ic1.png" alt="">
+                                        <span>Overview</span>
+                                    </a>
+                                </li>
+                                <li data-tab="info-dd">
+                                    <a href="#" title="">
+                                        <img src="images/ic2.png" alt="">
+                                        <span>Media</span>
+                                    </a>
+                                </li>
+                                <li data-tab="saved-jobs">
+                                    <a href="#" title="">
+                                        <img src="images/ic4.png" alt="">
+                                        <span>Participants</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+
+
+
+
+                <div class="author-date">
+                            <div class="author-thumb">
+                                <img alt='' src=''  class='avatar avatar-30 photo' height='30' width='30' loading='lazy' />
+                            </div>
+                        </div>
+
+                        <div class="post-content-wrap">
+
+
+                            <div class="post-content">
+                                <div class="product-feed-tab current" id="feed-dd">
+                                    <div class="posts-section">
+                                        <div class="post-bar">
+                                            <div class="post_topbar">
+                                                <div class="usy-dt">
+                                <p><img loading="lazy" class="alignnone wp-image-57 size-full" src="/uploads/{{ tournoi.image }}" alt="{{ tournoi.image }}" width="300" height="400"  sizes="(max-width: 1200px) 100vw, 1200px" /></p>
+
+                                <p style="text-align: center;">{{ tournoi.description |raw}}</p>
+
+                                <ul class="filter-icons reaction-toggle-parent reactions-count-used-118" data-post="118" data-nonce="8c6e8b7414">
+                                    <li>
+                                        <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                            <img src="{{asset('images/icon10.png')}}" alt="icon">
+                                            <span>Date début : {{ tournoi.dateTournoi ? tournoi.dateTournoi|date('Y-m-d') : ''  }}</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                            <img src="{{asset('images/icon9.png')}}" alt="icon">
+                                            <span>Lieu : {{ tournoi.adresse}}</span>
+
+
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" data-type="crumina-reaction-amazed" class="post-add-icon inline-items reaction-toggle-icon disabled">
+                                            <img src="{{asset('images/participants.png')}}" alt="icon">
+                                            <span>Nombre max participants : {{ tournoi.Nbmax}}</span>
+
+                                        </a>
+                                    </li>
+                                    <a href="{{ path('participer', {'id': tournoi.id,}) }}"><button>Participer</button></a>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-feed-tab" id="info-dd">
+                                    <div class="user-profile-ov">
+                                    <div class="ui-block">
+                                <iframe  width="560" height="315" src="https://www.youtube.com/embed/{{ tournoi.LienYoutube}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                                </div>
+                            </div>
+                                <div class="product-feed-tab" id="saved-jobs">
+                                    <div class="user-profile-ov">
+
+                                        <span>Participants : {% for p in participantsT %}
+                                            <div class="author-thumb">
+                                               <span>     {{ p.userT.username}}</span>
+                                            </div>
+                                             {% endfor %}
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+
+                        <a href="{{ path('tournoi_edit', {'id': tournoi.id}) }}">edit</a>
+
+        </article>
+
+        </div>
+            </main>
+    </div>
+    </div>
+
+        {% endblock %}

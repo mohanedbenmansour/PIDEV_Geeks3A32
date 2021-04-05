@@ -77,6 +77,27 @@ class Tournoi
     private $category;
 
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Lien_youtube;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $active;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ParticipationT::class, mappedBy="tournoi")
+     */
+    private $participationTs;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="tournois")
+     */
+    private $userT;
+
+
 
 
 
@@ -175,7 +196,12 @@ class Tournoi
         $this->date_publication = new \DateTime('now');
         $this->Nom_user = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->active=1;
+        $this->user = new ArrayCollection();
+        $this->Participants = new ArrayCollection();
         $this->Participant = new ArrayCollection();
+        $this->participationTournois = new ArrayCollection();
+        $this->participationTs = new ArrayCollection();
     }
 
 
@@ -190,6 +216,78 @@ class Tournoi
 
         return $this;
     }
+
+
+    public function getLienYoutube(): ?string
+    {
+        return $this->Lien_youtube;
+    }
+
+    public function setLienYoutube(string $Lien_youtube): self
+    {
+        $this->Lien_youtube = $Lien_youtube;
+
+        return $this;
+    }
+
+    public function getActive(): ?int
+    {
+        return $this->active;
+    }
+
+    public function setActive(int $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ParticipationT[]
+     */
+    public function getParticipationTs(): Collection
+    {
+        return $this->participationTs;
+    }
+
+    public function addParticipationT(ParticipationT $participationT): self
+    {
+        if (!$this->participationTs->contains($participationT)) {
+            $this->participationTs[] = $participationT;
+            $participationT->setTournoi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipationT(ParticipationT $participationT): self
+    {
+        if ($this->participationTs->removeElement($participationT)) {
+            // set the owning side to null (unless already changed)
+            if ($participationT->getTournoi() === $this) {
+                $participationT->setTournoi(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUserT(): ?Utilisateur
+    {
+        return $this->userT;
+    }
+
+    public function setUserT(?Utilisateur $userT): self
+    {
+        $this->userT = $userT;
+
+        return $this;
+    }
+
+
+
+
+
 
 
 

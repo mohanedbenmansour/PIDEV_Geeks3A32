@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
+{% set queryParams = app.request.query.all %}
 
 {% block title %}Tournoi{% endblock %}
 
 {% block body %}
+
     <style>
         * {
             font-family: "Roboto";
@@ -13,18 +15,7 @@
             letter-spacing: 1px;
             box-sizing: border-box;
         }
-        body {
-            background: #f9fafa;
-            padding: 20px;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: center;
-            -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-        }
+
         .block {
             margin: 20px;
             border-radius: 4px;
@@ -111,95 +102,35 @@
         }
 
     </style>
-    <div class="container text-center">
-<h1><strong class="text-danger">Tournoi</strong></h1>
+<div class="heading" style="margin-left:10cm">
+                <h1><strong class="text-danger">Tournoi</strong></h1>
+</div>
+<div class="info" style="margin-left: -3cm">
+                <p>Filtrer</p>
+                <form id="filters">
+                    {% for category in categorys %}
+                        {# On vérifie si la catégorie est dans les paramètres #}
+                        {% if queryParams is not empty and queryParams.categorys is defined %}
+                            {% set checked = (category.id in queryParams.categorys) ? "checked" : "" %}
+                        {% else %}
+                            {% set checked = "" %}
+                        {% endif %}
+
+                        <p><input type="checkbox" name="categorys[]" id="cat{{category.id}}" value="{{category.id}}" {{ checked }} >
+                            <label for="cat{{category.id}}">{{category.Type}}</label></p>
+                    {% endfor %}
+                    <input type="hidden" name="page" value="{{page}}">
+
+                </form>
+            </div>
+<div class="container">
+    <div class="grix xs1 sm5 gutter-0 card">
+        <div class="col-xs1">
+            <div class="col-xs1 col-sm4" id="content">
+                {% include "tournoi/index_content.html.twig" %}
+            </div>
+        </div>
     </div>
-    <input type="text" id="search" name="search" class="form-control"
-
-           placeholder="Search">
-    <table class="table" id="t">
-        <thead>
-            <tr>
-
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Type du tournoi</th>
-                <th>Nombre de Participants</th>
-                <th>Adresse</th>
-                <th>Image</th>
-                <th>Date du tournoi</th>
-                <th>Date de publication</th>
-
-            </tr>
-        </thead>
-        <tbody id="all">
-        {% for tournoi in pagination %}
-            <tr>
-
-                <td>{{ tournoi.Nom }}</td>
-                <td>{{ tournoi.description }}</td>
-                <td>{{ tournoi.category }}</td>
-                <td>{{ tournoi.Nbmax}}</td>
-                <td>{{ tournoi.adresse }}</td>
-                <div class="middle">
-                <td><a href="{{ path('tournoi_show', {'id': tournoi.id}) }}"><img src="/uploads/{{ tournoi.image }}" alt="{{ tournoi.image }}" width="100" height="100"></a></td>
-                </div>
-                <td>{{ tournoi.dateTournoi ? tournoi.dateTournoi|date('Y-m-d') : '' }}</td>
-                <td>{{ tournoi.datePublication ? tournoi.datePublication|date('Y-m-d') : '' }}</td>
-
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        {{ knp_pagination_render(pagination)}}
-        </tbody>
-        <tbody id="search">
-        </tbody>
-    </table>
-    {{ knp_pagination_render(pagination)}}
-
-    <a href="{{ path('tournoi_new') }}">Create new</a>
-
-
-<script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-</script>
-<script>
-    $( document ).ready(function() {
-        $("#search").keyup(function(e){
-            var value = $(this).val();
-            $.ajax({
-                url : "{{ path('tournoi_index') }}",
-                type : 'GET',
-                data: {
-                    'searchValue' : value
-                },
-                success : function(retour){
-                    if(retour){
-                        $('#t tbody#search').empty();
-                        $.each(JSON.parse(retour), function(i, obj) {
-                            $('#t tbody#all').hide();
-   $('#t tbody#search').append('<tr><td> '+obj.id+' </td><td> '+obj.nom+' </td><td>'+obj.adresse+' </td><td>' +
-       '<ahref="tournoi_edit/'+obj.id+'">modifier</a> </br>' +
-       '<ahref="tournoi_edit/'+obj.id+'">supprimer</a></td></tr>');
-                        });
-
-                    }
-                    else
-                    {
-
-                        $('#t tbody#all').show();
-                        $('#t tbody#search').empty();
-                        $('#t tbody#search').fadeIn('fast');
-
-                    }
-
-                },
-            });
-            return false;
-        });
-    });
-</script>
+    </div>
+    <script src="{{ asset('js/filters.js') }}"></script>
 {% endblock %}

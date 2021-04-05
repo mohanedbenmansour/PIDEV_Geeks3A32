@@ -10,12 +10,12 @@
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
-                <th>Description</th>
                 <th>Nombre de Participants</th>
                 <th>Adresse</th>
                 <th>Image</th>
                 <th>Date_tournoi</th>
                 <th>Date_publication</th>
+                <th>Activer/Desactiver</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -24,15 +24,17 @@
             <tr>
                 <td>{{ tournoi.id }}</td>
                 <td>{{ tournoi.Nom }}</td>
-                <td>{{ tournoi.description }}</td>
                 <td>{{ tournoi.Nbmax}}</td>
                 <td>{{ tournoi.adresse }}</td>
                 <td><img src="/uploads/{{ tournoi.image }}" alt="{{ tournoi.image }}" width="100" height="100"></td>
                 <td>{{ tournoi.dateTournoi ? tournoi.dateTournoi|date('Y-m-d') : '' }}</td>
                 <td>{{ tournoi.datePublication ? tournoi.datePublication|date('Y-m-d') : '' }}</td>
+                <td>{{ tournoi.active }}</td>
+
                 <td>
                     <a href="{{ path('tournoi_showback', {'id': tournoi.id}) }}">show</a>
-                    <a href="{{ path('tournoi_edit', {'id': tournoi.id}) }}">edit</a>
+                    <a href="{{ path('tournoi_editback', {'id': tournoi.id}) }}">edit</a>
+
                 </td>
             </tr>
         {% else %}
@@ -40,8 +42,9 @@
                 <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
+
         </tbody>
+    <td>        <a href="{{ path('tournoi_new') }}">Create new</a> </td>
     </table>
 
-    <a href="{{ path('tournoi_new') }}">Create new</a>
 {% endblock %}
