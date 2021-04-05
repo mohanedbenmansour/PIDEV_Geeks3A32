@@ -46,7 +46,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/event/{id}/deletecom/{idc}", name="comment_delete", methods={"DELETE"})
+     * @Route("/event/{id}/deletecom/{idc}", name="commentEvent_delete", methods={"DELETE"})
      */
     public function Commentdelete(Request $request, CommentEvent $comment, EventRepository $eventRepository,$id
     ): Response

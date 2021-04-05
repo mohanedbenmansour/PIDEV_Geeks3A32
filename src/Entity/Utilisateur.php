@@ -298,13 +298,7 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|ParticipationT[]
-     */
-    public function getParticipationTs(): Collection
-    {
-        return $this->participationTs;
-    }
+
 
     public function addParticipationT(ParticipationT $participationT): self
     {
@@ -328,13 +322,7 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Tournoi[]
-     */
-    public function getTournois(): Collection
-    {
-        return $this->tournois;
-    }
+
 
     public function addTournoi(Tournoi $tournoi): self
     {
