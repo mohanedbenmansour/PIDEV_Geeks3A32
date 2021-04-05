@@ -27,6 +27,7 @@ class HomePageController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $post->setImage("3.jpg");
             $post->getUploadFile();
+            $post->setEtat('enable');
             $post->setDate(new \DateTime());
             $post->setNbrvue(0);
             $post->setIdUser($this->getUser());

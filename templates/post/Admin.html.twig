@@ -1,0 +1,45 @@
+{% extends 'base.back.html.twig' %}
+
+{% block title %}Publicite index{% endblock %}
+
+{% block main %}
+
+    <div class="container">
+        <h1>Post index</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Content</th>
+                <th>Date</th>
+                <th>Nombre de vue</th>
+                <th>User</th>
+                <th>Etat</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in posts %}
+
+                <td>{{ p.contenu }}</td>
+                <td>{{ p.date|date('Y-m-d')  }}</td>
+                <td>{{ p.nbrvue }}</td>
+                <td>{{ p.idUser.username }}</td>
+
+                      {% if p.etat == "disable" %}
+                <td>disabled</td>
+                {% else %}
+                <td>
+                    <a class="btn btn btn-warning" href="{{ path('disable', {'id': p.id}) }}">Disable</a>
+                </td>
+                    {% endif %}
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+{% endblock %}

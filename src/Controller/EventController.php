@@ -103,6 +103,7 @@ class EventController extends AbstractController
 
         $event->setDatePub(new \DateTime());
         $event->setUser($this->getUser());
+        $event->setEtat('enabled');
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -181,7 +182,6 @@ class EventController extends AbstractController
         return $this->render('event/show.html.twig', [
             'participants' => $participants,
             'event' => $event,
-            'uid' => self::$uid,
             'exist' => $result,
             'complet' => $complet,
             'comments' => $comments,
@@ -229,7 +229,7 @@ class EventController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($event);
+            $event->setEtat('disabled');
             $entityManager->flush();
         }
 
@@ -255,7 +255,7 @@ class EventController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($event);
+            $event->setEtat('disabled');
             $entityManager->flush();
         }
 
@@ -267,6 +267,16 @@ class EventController extends AbstractController
      */
     public function event_show(Event $event): Response
     {
+        $complet=false;
+        $nbr=0;
+        foreach ($event->getParticipations() as $p){
+            if($p->getUser()->getId()==self::$uid){
+                $result=true;
+                $nbr++;
+            }
+        }
+        if($nbr >= $event->getNbParticipants())
+            $complet=true;
         $participants = $this->getDoctrine()->getManager()
             ->createQuery('SELECT p
                 FROM App\Entity\Participation p
@@ -280,6 +290,7 @@ class EventController extends AbstractController
         return $this->render('dashboard/events/show.html.twig', [
             'event' => $event,
             'participants' => $participants,
+            'complet' => $complet,
             'comments' => $comments,
         ]);
     }

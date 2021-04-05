@@ -26,41 +26,19 @@ class PostController extends AbstractController
     public function index(PostRepository $postRepository): Response
     {
         return $this->render('post/index.html.twig', [
-            'posts' => $postRepository->findAll(),
+            'posts' => $postRepository->findBy(array('etat'=>'enable')),
         ]);
     }
 
+
+
     /**
-     * @Route("/new", name="post_new", methods={"GET","POST"})
+     * @Route("/adminPost", name="post_admin", methods={"GET"})
      */
-    public function new(Request $request , PostRepository $postRepository, CommentRepository $commRepository): Response
+    public function indexAdmin(PostRepository $postRepository): Response
     {
-        $post = new Post();
-        $form = $this->createForm(PostType::class, $post);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $post->setImage("3.jpg");
-            $post->getUploadFile();
-            $post->setDate(new \DateTime());
-            $post->setNbrvue(0);
-            $post->setIdUser($this->getUser());
-            $entityManager->persist($post);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('home_page');
-        }
-
-
-        return $this->render('home_page/index.html.twig', [
-            'post' => $post,
-            'user'=>$this->getUser(),
-            'form' => $form->createView(),
+        return $this->render('post/Admin.html.twig', [
             'posts' => $postRepository->findAll(),
-            'comment' => $commRepository->findAll(),
-
-
         ]);
     }
 
@@ -107,10 +85,38 @@ class PostController extends AbstractController
 
         $post =$repository->find($id);
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($post);
+        $post->setEtat('disable');
         $entityManager->flush();
         return $this->redirectToRoute('home_page');
 
     }
+
+    /**
+     * @Route("/disable/{id}", name="disable", methods={"GET"})
+     */
+    public function disablePost($id,\Swift_Mailer $mailer): Response
+    {
+        $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
+        $post->setEtat('disable');
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($post);
+        $entityManager->flush();
+        $message = (new \Swift_Message('Post Disabled'))
+            ->setFrom('mohamedamine.zaafouri@esprit.tn')
+            ->setTo($post->getIdUser()->getEmail())
+            ->setBody(
+                $this->renderView(
+                // templates/emails/registration.html.twig
+                    'post/emailsDisable.html.twig',
+                    ['post' => $post ]
+                ),
+                'text/html'
+            );
+        $mailer->send($message);
+
+        return $this->redirectToRoute('post_admin');
+
+    }
+
 
 }

@@ -108,6 +108,12 @@ class Event
      * @ORM\OneToMany(targetEntity=CommentEvent::class, mappedBy="Event")
      */
     private $commentEvents;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez charger une image")
+     */
+    private $etat;
     
 
     public function __construct()
@@ -330,6 +336,22 @@ class Event
             }
         }
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @param mixed $etat
+     */
+    public function setEtat($etat): void
+    {
+        $this->etat = $etat;
     }
 
     

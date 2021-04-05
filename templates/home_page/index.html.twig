@@ -26,25 +26,57 @@
                     </div>
                   </div>
                   <ul class="user-fw-status">
-                    <li>
-                      <h4>Following</h4>
-                      <span>34</span>
-                    </li>
-                    <li>
-                      <h4>Followers</h4>
-                      <span>155</span>
-                    </li>
+
                     <li>
                       <a href="{{ path('profil', {'id': app.user.id}) }}">View Profil</a>
                     </li>
                   </ul>
                 </div>
+              </div>
+              <div class="right-sidebar">
+                <div class="right-sidebar">
+                  <div class="widget widget-about">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                      <ol class="carousel-indicators">
 
+                        {% set i = 1 %}
+                        {% for publicity in publicities %}
+                          {% if publicity.etat %}
 
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ i }}"></li>
+                            {% set i = i+1 %}
+                          {% endif %}
+                        {% endfor %}
+                      </ol>
+                      <div class="carousel-inner">
+                        {% set k = 0 %}
+                        {% for publicity in publicities %}
+                          {% if publicity.etat %}
+
+                            <div class="carousel-item {% if k < 1 %}active {% set k = 1 %} {% endif %} ">
+                              <img class="d-block w-100" height="250px" src="/uploads/{{publicity.image }}" alt="" />
+                              <h3>{{publicity.content }}</h3>
+                            </div>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </div>
+
+                  </div>
+
+                </div>
               </div>
             </div>
 
-            <div class="col-lg-6 col-md-8 no-pd">
+            <div class="col-lg-hh6 col-md-8 no-pd">
               <div class="main-ws-sec">
                 <div class="post-topbar">
                   <div class="post-comment">
@@ -64,9 +96,10 @@
                   </div>
                 </div>
               </div>
-            {% endif %}
+              {% endif %}
 
               {% for p in posts %}
+              {% if p.etat == 'enable' %}
               {% set a = 0 %}
               {% for c in comment %}
                 {% if c.idpost.id == p.id %}
@@ -137,50 +170,8 @@
                     <a href="#"><i class="fas fa-eye"></i>Views {{ p.nbrvue }}</a>
                   </div>
                 </div>
+                {% endif %}
                 {% endfor %}
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 pd-right-none no-pd">
-            <div class="right-sidebar">
-              <div class="right-sidebar">
-                <div class="widget widget-about">
-                  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-
-                      {% set i = 1 %}
-                      {% for publicity in publicities %}
-                        {% if publicity.etat %}
-
-                          <li data-target="#carouselExampleIndicators" data-slide-to="{{ i }}"></li>
-                          {% set i = i+1 %}
-                        {% endif %}
-                      {% endfor %}
-                    </ol>
-                    <div class="carousel-inner">
-                      {% set k = 0 %}
-                      {% for publicity in publicities %}
-                        {% if publicity.etat %}
-
-                          <div class="carousel-item {% if k < 1 %}active {% set k = 1 %} {% endif %} ">
-                            <img class="d-block w-100" height="250px" src="/uploads/{{publicity.image }}" alt="" />
-                            <h3>{{publicity.content }}</h3>
-                          </div>
-                        {% endif %}
-                      {% endfor %}
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </div>
-
-                </div>
-
               </div>
             </div>
           </div>

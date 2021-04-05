@@ -27,6 +27,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="comments")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $idUser;
 
@@ -34,6 +35,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="comments")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $idpost;
 

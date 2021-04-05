@@ -61,6 +61,13 @@ class Post
     private $image;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="etat", type="text", length=65535, nullable=false)
+     */
+    private $etat;
+
+    /**
      * @Assert\File(maxSize="500000000k")
      */
     public  $file;
@@ -232,6 +239,23 @@ class Post
     {
         $this->nbrvue = $nbrvue;
     }
+
+    /**
+     * @return string
+     */
+    public function getEtat(): string
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @param string $etat
+     */
+    public function setEtat(string $etat): void
+    {
+        $this->etat = $etat;
+    }
+
 
 
 }
