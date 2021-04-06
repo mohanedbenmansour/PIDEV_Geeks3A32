@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RiotGamesController!{% endblock %}
+
+{% block body %}
+<div class="container text-center pt-5">
+    <form action="{{ path('riot_games') }}" method="GET" class="form-group mt-5">
+
+        <input type="text" id="nickname" name="nickname" class="form-control" placeholder="add your nickname"/>
+        <button type="submit" class="btn btn-success mt-3">submit</button>
+    </form>
+</div>
+
+{% endblock %}
