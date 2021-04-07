@@ -19,6 +19,28 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+    /**
+     *
+     * @return void
+     */
+    public function search($mots=null, $category=ull) {
+        $now = new \DateTime();
+        $query = $this->createQueryBuilder('e');
+        $query->where('e.dateDebut > :now')
+            ->setParameter(':now', $now)->orderBy('e.dateDebut');
+        if($mots != null){
+            $query->andWhere('MATCH_AGAINST (e.name,e.description,e.lieu) AGAINST (:mots boolean)>0')
+                ->setParameter('mots', $mots);
+        }
+        if($category != null){
+            $query->leftJoin('e.Category', 'c');
+            $query->andWhere('c.id = :id')
+                ->setParameter('id',$category);
+        }
+        return $query->getQuery()->getResult();
+    }
+
+
     // /**
     //  * @return Event[] Returns an array of Event objects
     //  */

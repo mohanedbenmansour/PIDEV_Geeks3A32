@@ -167,11 +167,11 @@
                             <h5 class="heading-title">Related Articles</h5>
                         </div>
                         <div class="row">
-                            <div class="">
+                            <div class="" style="width: 330px">
                                 {% for event in suggestedEvents %}
                                 <div class="col-xl-6 col-lg-6 col-md-6" >
                                 <div class="ui-block">
-                                    <div class="post-thumb" style"margin-top: 5px">
+                                    <div class="post-thumb" style="margin-top: 5px; width: 330px" >
                                     <center><img src="/uploads/{{ event.img }}" alt="image event"style="display: block;
                                                                             margin-left: auto;
                                                                             margin-right: auto;
@@ -210,10 +210,8 @@
                                             <li><img src="../images/icon10.png" alt=""><span>{{ event.dateFin ? event.dateFin|date('Y-m-d H:i:s') : '' }}</span></li>
 
                                         </ul>
-
                                     </div>
                                     <div class="job_descp" style="padding: 0px 20px 0px; background-color: #fff;">
-                                        {#<h3>Simple Classified Site</h3>#}
 
                                         <div style="max-width: 420px; margin: 38px auto;">
                                             <p style="overflow: hidden !important; display: -webkit-box !important; -webkit-line-clamp: 3 !important; -webkit-box-orient: vertical !important;">
@@ -226,16 +224,6 @@
                                                 <li><span>{{ event.prix }}DT</span></li>
                                             {% endif %}
                                             <li class="bk-links"><a style="font-size:16px; padding:0px 10px" href="{{ path('event_show', {'id': event.id}) }}" title="" class="bid_now">Afficher</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="job-status-bar" style="padding: 0px 30px 10px; background-color: #fff;">
-                                        <ul class="like-com">
-                                            <li>
-                                                <a href="#" class="active"><i class="fas fa-heart"></i> Like</a>
-                                                <img src="../images/liked-img.png" alt="">
-                                                <span>25</span>
-                                            </li>
-                                            <li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comments 15</a></li>
                                         </ul>
                                     </div>
                                     </div>

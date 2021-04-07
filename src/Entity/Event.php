@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
+ * @ORM\Table(name="event", indexes={@ORM\Index(columns={"name","lieu","description"}, flags={"fulltext"})})
  */
 class Event
 {
@@ -68,8 +69,6 @@ class Event
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez charger une image")
-     * @Assert\File(mimeTypes={ "image/png","image/jpeg"})
      */
     private $img;
 

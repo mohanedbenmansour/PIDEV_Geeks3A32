@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210405213719 extends AbstractMigration
+final class Version20210406235724 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,12 +20,12 @@ final class Version20210405213719 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE post ADD etat TEXT NOT NULL');
+        $this->addSql('CREATE FULLTEXT INDEX IDX_3BAE0AA75E237E062F577D596DE44026 ON event (name, lieu, description)');
     }
 
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE post DROP etat');
+        $this->addSql('DROP INDEX IDX_3BAE0AA75E237E062F577D596DE44026 ON event');
     }
 }

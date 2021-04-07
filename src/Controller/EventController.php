@@ -7,6 +7,7 @@ use App\Entity\Event;
 use App\Entity\Participation;
 use App\Form\CommentEventType;
 use App\Form\EventType;
+use App\Form\SearchEventType;
 use App\Repository\CategorieEventRepository;
 use App\Repository\CommentEventRepository;
 use App\Repository\EventRepository;
@@ -22,11 +23,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class EventController extends AbstractController
 {
-    private static $uid = 4;
     /**
-     * @Route("/", name="event_index", methods={"GET"})
+     * @Route("/", name="event_index")
      */
-    public function index(Request $request,PaginatorInterface $paginator,CategorieEventRepository $categorieEventRepository): Response
+    public function index(Request $request,PaginatorInterface $paginator,EventRepository $eventRepository,CategorieEventRepository $categorieEventRepository): Response
     {
         $now = new \DateTime();
         $donnees = $this->getDoctrine()->getManager()
@@ -35,13 +35,24 @@ class EventController extends AbstractController
                 WHERE e.dateDebut > :now
                 ORDER BY e.dateDebut ASC')
             ->setParameter('now', $now)->getResult();
+
+        $form = $this->createForm(SearchEventType::class);
+
+        $search = $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $donnees = $eventRepository->search(
+                $search->get('mots')->getData(),
+                $search->get('category')->getData()
+            );
+        }
         $events = $paginator->paginate(
             $donnees,
             $request->query->getInt('page',1),
             9);
-        return $this->render('event/index.html.twig', [
+            return $this->render('event/index.html.twig', [
             'events' => $events,
             'categories' => $categorieEventRepository->findAll(),
+            'form' =>$form->createView(),
         ]);
     }
 
@@ -72,7 +83,7 @@ class EventController extends AbstractController
         $event=$eventRepository->find($id);
         $nbr=0;
         foreach ($event->getParticipations() as $p){
-            if($p->getUser()->getId()==self::$uid){
+            if($p->getUser()==$this->getUser()){
                 $nbr++;
             }
         }
@@ -104,8 +115,8 @@ class EventController extends AbstractController
         $event->setDatePub(new \DateTime());
         $event->setUser($this->getUser());
         $event->setEtat('enabled');
-
-        if ($form->isSubmitted() && $form->isValid()) {
+//&& $form->isValid()
+        if ($form->isSubmitted() ) {
 
            /** @var UploadedFile $uploadedFile */
             $uploadedFile = $form['img']->getData();
@@ -140,7 +151,7 @@ class EventController extends AbstractController
         $result=false;
         $nbr=0;
         foreach ($event->getParticipations() as $p){
-            if($p->getUser()->getId()==self::$uid){
+            if($p->getUser()==$this->getUser()){
                 $result=true;
                 $nbr++;
             }
@@ -270,8 +281,7 @@ class EventController extends AbstractController
         $complet=false;
         $nbr=0;
         foreach ($event->getParticipations() as $p){
-            if($p->getUser()->getId()==self::$uid){
-                $result=true;
+            if($p->getUser()==$this->getUser()){
                 $nbr++;
             }
         }

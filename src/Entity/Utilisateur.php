@@ -96,11 +96,7 @@ class Utilisateur implements UserInterface
      */
     private $tournois;
 
-    public function __construct()
-    {
-        $this->participationTs = new ArrayCollection();
-        $this->tournois = new ArrayCollection();
-    }
+
 
     public function getId(): ?int
     {

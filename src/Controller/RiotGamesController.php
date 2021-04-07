@@ -27,7 +27,7 @@ $rank="";
 
 $wins="";
 $losses="";
-
+//gPa7DtFQWhn9BdPFUqHtnmO0_Wg6lQbSxfX1GHreu5vqT9s
     $response = $httpClient->request('GET', 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/'.$nickname.'?api_key=RGAPI-a4de6d5c-a358-4dde-8fe9-7f19518b575f');
 
         if (200 !== $response->getStatusCode()) {
@@ -39,7 +39,7 @@ $losses="";
            $level=$content["summonerLevel"];
            $id=$content["id"];
         }
-        $response = $httpClient->request('GET', 'https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/gPa7DtFQWhn9BdPFUqHtnmO0_Wg6lQbSxfX1GHreu5vqT9s?api_key=RGAPI-a4de6d5c-a358-4dde-8fe9-7f19518b575f');
+        $response = $httpClient->request('GET', 'https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/'.$id.'?api_key=RGAPI-a4de6d5c-a358-4dde-8fe9-7f19518b575f');
 
         if (200 !== $response->getStatusCode()) {
             dd($response->getStatusCode());

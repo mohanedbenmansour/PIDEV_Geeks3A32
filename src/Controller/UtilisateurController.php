@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Form\SearchEventType;
+use App\Form\SearchUserType;
 use App\Form\UtilisateurType;
 use App\Security\EmailVerifier;
 use App\Repository\UtilisateurRepository;
@@ -32,9 +34,9 @@ class UtilisateurController extends AbstractController
 
 
     /**
-     * @Route("/utilisateur", name="utilisateur_index", methods={"GET"})
+     * @Route("/utilisateur", name="utilisateur_index")
      */
-    public function index(UtilisateurRepository $utilisateurRepository, Session $session): Response
+    public function index(UtilisateurRepository $utilisateurRepository, Session $session,Request $request): Response
     {
         //besoin de droits admin
         $utilisateur = $this->getUser();
@@ -45,8 +47,18 @@ class UtilisateurController extends AbstractController
         }
 
         else {
+            $utilisateurs=$utilisateurRepository->findAll();
+            $form = $this->createForm(SearchUserType::class);
+
+            $search = $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $utilisateurs = $utilisateurRepository->search(
+                    $search->get('mots')->getData()
+                );
+            }
             return $this->render('utilisateur/index.html.twig', [
-                'utilisateurs' => $utilisateurRepository->findAll(),
+                'utilisateurs' => $utilisateurs,
+                'form' => $form->createView()
             ]);
         }
 
@@ -72,7 +84,29 @@ class UtilisateurController extends AbstractController
             ]);
         }
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('home_page');
+    }
+
+    /**
+     * @Route("/adminDashboard", name="adminDashboard", methods={"GET"})
+     */
+    public function dashboard (UtilisateurRepository $utilisateurRepository, Session $session): Response
+    {
+        //besoin de droits admin
+        $utilisateur = $this->getUser();
+        if(!$utilisateur)
+        {
+            $session->set("message", "Merci de vous connecter");
+            return $this->redirectToRoute('app_login');
+        }
+
+        else if(in_array('ROLE_ADMIN', $utilisateur->getRoles())){
+            return $this->render('base_home_page/index.html.twig', [
+                'controller_name' => 'BaseHomePageController',
+            ]);
+        }
+
+        return $this->redirectToRoute('home_page');
     }
 
 
@@ -260,6 +294,6 @@ class UtilisateurController extends AbstractController
             $session->invalidate();
         }
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('home_page');
     }
 }
